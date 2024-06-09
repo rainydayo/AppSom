@@ -2,5 +2,6 @@
 export default {
     images: {
       domains: ['drive.google.com'],
-    }
+    },
+    reactStrictMode: true,
   };

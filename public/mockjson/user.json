@@ -1,15 +1,17 @@
-[
+{
+    "data": [
     {
       "id": "1",
       "name": "John Doe",
-      "email": "john.doe@example.com",
-      "password": "$2b$10$examplehashedpassword"
+      "username": "user",
+      "password": "$2b$10$SyCXv8qIa5T3XMYu.nVL3.smV7tYYGuy9no87uePQf3FXXp/36Z32"
     },
     {
       "id": "2",
       "name": "Jane Smith",
-      "email": "jane.smith@example.com",
-      "password": "$2b$10$examplehashedpassword"
+      "username": "jane.smith@example.com",
+      "password": "$2b$10$SyCXv8qIa5T3XMYu.nVL3.smV7tYYGuy9no87uePQf3FXXp/36Z32"
     }
-  ]
+    ]
+}
   

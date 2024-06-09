@@ -1,5 +1,7 @@
+'use client'
 import Image from "next/image";
 import convertImgUrl from "@/components/ControlSystem/convertImgUrl";
+import Link from "next/link";
 
 export default function Register() {
   const logoUrl = "https://drive.google.com/file/d/17ad4RrjEqQmKiwgwA0PmRLoadt1AiigI/view?usp=drive_link"
@@ -55,7 +57,7 @@ export default function Register() {
               <div className="flex-auto text-som">
                 Don't have an account?
               </div>
-              <div className="flex-auto text-orange-700 underline">Register</div>
+              <Link href={'/auth/login'} className="flex-auto text-orange-700 underline">Log-in</Link>
             </div>
           </div>
         </div>

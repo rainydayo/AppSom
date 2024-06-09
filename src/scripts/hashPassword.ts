@@ -1,9 +1,9 @@
-import bcrypt from 'bcrypt';
+const bcrypt = require('bcrypt');
 
 const saltRounds = 10;
-const plainPassword = 'your_password_here';
+const plainPassword = '12345678';
 
-bcrypt.hash(plainPassword, saltRounds, (err, hash) => {
+bcrypt.hash(plainPassword, saltRounds, (err: any, hash: any) => {
   if (err) throw err;
-  console.log(hash); // Store this hash in your JSON file
+  console.log(hash);
 });
