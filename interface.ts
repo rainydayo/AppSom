@@ -45,3 +45,7 @@ export interface Board {
     member: User[],
     color: string
 }
+
+export interface BoardJSON {
+    data: Board[]
+}

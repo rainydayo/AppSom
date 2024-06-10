@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import { BoardJSON } from '../../../../interface';
 
 export async function POST(req: Request) {
     try {
@@ -9,7 +10,7 @@ export async function POST(req: Request) {
         const filePath = path.resolve('./public/Storage/Board/board.json');
 
         const fileData = fs.readFileSync(filePath, 'utf-8');
-        const jsonData = JSON.parse(fileData);
+        const jsonData: BoardJSON = JSON.parse(fileData);
 
         jsonData.data.push(board);
 
