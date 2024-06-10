@@ -4,12 +4,13 @@ import { AppDispatch } from "@/redux/store"
 import { useDispatch } from "react-redux"
 import { Board, User } from "../../../interface";
 import { addBoard } from "@/redux/feature/boardSlice";
+import GetDataFromJson from "@/lib/GetDataFromJson";
 
 export default function CreateBoard () {
-    const dispatch = useDispatch<AppDispatch>();
+    //const dispatch = useDispatch<AppDispatch>();
 
-    const createBoard = () => {
-        const user:User = {
+    const createBoard = async () => {
+        const user: User = {
             id: "ADMIN",
             name: "Jason",
             email: "jason@jason.com",
@@ -18,7 +19,7 @@ export default function CreateBoard () {
             role: "admin",
             image: ""
         }
-        const board:Board = {
+        const board: Board = {
             id: "B0003",
             name: "My Board 3",
             description: "This is my board 3",
@@ -28,9 +29,25 @@ export default function CreateBoard () {
             member: [user],
             color: ""
         }
-        dispatch(addBoard(board));
-        alert("board created");
-        console.log(board);
+
+        //dispatch(addBoard(board));
+
+        const response = await fetch('/api/create-board', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(board)
+        });
+
+        if (response.ok) {
+            alert("Board created and saved to JSON file");
+            console.log(board);
+        } else {
+            alert("Failed to save the board to JSON file");
+        }
+        const boardData = await GetDataFromJson('Storage/Board/board.json');
+        console.log(boardData)
     }
 
     return (

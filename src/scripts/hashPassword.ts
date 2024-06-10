@@ -7,3 +7,4 @@ bcrypt.hash(plainPassword, saltRounds, (err: any, hash: any) => {
   if (err) throw err;
   console.log(hash);
 });
+//npx ts-node src/scripts/hashPassword.ts
