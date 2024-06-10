@@ -1,7 +1,7 @@
 import { AuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcrypt';
-import usersData from '../../public/mockjson/user.json';
+import usersData from '../../public/Storage/User/user.json';
 
 export const authOptions: AuthOptions = {
   providers: [
