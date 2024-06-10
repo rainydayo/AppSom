@@ -1,5 +1,5 @@
-export default async function GetDataFromJson (path: string) {
-    const file = await fetch(`${path}`,
+export default async function GetBoards () {
+    const file = await fetch(`/Storage/Board/board.json`,
         {
             headers: {
             'Content-Type': 'application/json'

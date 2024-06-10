@@ -1,0 +1,24 @@
+{
+    "data": [
+        {
+            "id": "B0002",
+            "name": "My Board 2",
+            "description": "This is my board",
+            "lists": [],
+            "favorite": false,
+            "owner": null,
+            "member": [],
+            "color": ""
+        },
+        {
+            "id": "B0001",
+            "name": "My Board 1",
+            "description":"This is my board 1",
+            "lists": [],
+            "favorite": true,
+            "owner": null,
+            "member": [],
+            "color": ""
+        }
+    ]
+}

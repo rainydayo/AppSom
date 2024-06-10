@@ -19,9 +19,9 @@ export default function CreateBoard () {
             image: ""
         }
         const board:Board = {
-            id: "B0002",
-            name: "My Board 2",
-            description: "This is my board",
+            id: "B0003",
+            name: "My Board 3",
+            description: "This is my board 3",
             lists: [],
             favorite: false,
             owner: user,

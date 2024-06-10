@@ -1,5 +1,6 @@
 import {PayloadAction, createSlice} from "@reduxjs/toolkit";
 import { Board } from "../../../interface";
+import CreateBoard from "@/not-used/CreateBoard";
 
 type BoardState = {
     boards: Board[]
@@ -21,7 +22,6 @@ export const boardSlice = createSlice({
             state.boards.push(action.payload);
             
             console.log("board = " + action.payload.name);
-            
             
         },
 
