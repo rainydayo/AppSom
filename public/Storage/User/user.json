@@ -1,17 +1,28 @@
 {
-    "data": [
+  "data": [
     {
       "id": "1",
       "name": "John Doe",
       "username": "user",
-      "password": "$2b$10$SyCXv8qIa5T3XMYu.nVL3.smV7tYYGuy9no87uePQf3FXXp/36Z32"
+      "password": "$2b$10$SyCXv8qIa5T3XMYu.nVL3.smV7tYYGuy9no87uePQf3FXXp/36Z32",
+      "role": "ADMIN",
+      "image": "https://drive.google.com/file/d/1nA_gi49DH-usUT6p2z6Q-bqGpkyYpAdo/view?usp=drive_link"
     },
     {
       "id": "2",
       "name": "Jane Smith",
-      "username": "jane.smith@example.com",
-      "password": "$2b$10$SyCXv8qIa5T3XMYu.nVL3.smV7tYYGuy9no87uePQf3FXXp/36Z32"
+      "username": "jane",
+      "password": "$2b$10$SyCXv8qIa5T3XMYu.nVL3.smV7tYYGuy9no87uePQf3FXXp/36Z32",
+      "role": "USER",
+      "image": "https://drive.google.com/file/d/1nA_gi49DH-usUT6p2z6Q-bqGpkyYpAdo/view?usp=drive_link"
+    },
+    {
+      "id": "3940ff13-2a35-48cf-bd0a-01a851404997",
+      "name": "Moo",
+      "username": "Moo",
+      "role": "USER",
+      "image": "https://drive.google.com/file/d/17ad4RrjEqQmKiwgwA0PmRLoadt1AiigI/view?usp=drive_link",
+      "password": "$2a$10$vWMA7y9XasvPD4O4fIlpz.FQu0aDL0Bc3Q9RFyVPgzdtYLMBQEGfa"
     }
-    ]
+  ]
 }
-  

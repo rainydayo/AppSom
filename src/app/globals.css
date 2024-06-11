@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -17,6 +19,7 @@
 }
 
 body {
+  font-family: 'Inter', sans-serif;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -31,3 +34,16 @@ body {
     text-wrap: balance;
   }
 }
+
+:root {
+  --color-som: #FF6B18; /* Default color */
+}
+
+.bg-som {
+  background-color: var(--color-som);
+}
+
+.text-som {
+  color: var(--color-som);
+}
+

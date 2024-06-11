@@ -13,16 +13,16 @@ export const authOptions: AuthOptions = {
       },
       authorize: async (credentials) => {
         const user = usersData.data.find(user => user.username === credentials?.username);
-        //console.log('User Found:', user);
 
         if (user) {
           const isValid = await bcrypt.compare(credentials!.password, user.password);
-          //console.log('Password Valid:', isValid);
           if (isValid) {
             return {
               id: user.id,
               name: user.name,
               username: user.username,
+              role: user.role,
+              image: user.image
             };
           }
         }
@@ -38,20 +38,22 @@ export const authOptions: AuthOptions = {
   },
   callbacks: {
     async jwt({ token, user }) {
-      //console.log('JWT callback:', { token, user });
       if (user) {
         token.id = user.id;
         token.name = user.name;
         token.username = user.username;
+        token.image = user.image;
+        token.role = user.role;
       }
       return token;
     },
     async session({ session, token }) {
-      //console.log('Session callback:', { session, token });
       session.user = {
         id: token.id,
         name: token.name,
         username: token.username,
+        image: token.image,
+        role: token.role,
       };
       return session;
     }

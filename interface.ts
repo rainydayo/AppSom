@@ -11,9 +11,8 @@ export interface Sample {
 export interface User {
     id: string,
     name: string,
-    email: string,
+    username: string,
     password: string,
-    tel: string,
     role: string,
     image: string,
 }
@@ -48,4 +47,8 @@ export interface Board {
 
 export interface BoardJSON {
     data: Board[]
+}
+
+export interface UserJSON {
+    data: User[]
 }
