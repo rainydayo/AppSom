@@ -4,4 +4,7 @@ export default {
       domains: ['drive.google.com'],
     },
     reactStrictMode: true,
+    experimental: {
+      serverActions: true
+    }
   };

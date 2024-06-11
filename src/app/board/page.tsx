@@ -6,6 +6,7 @@ import { Board, User } from "../../../interface"
 import { revalidateTag } from "next/cache"
 import CreateBoard from "@/lib/CreateBoard"
 import { randomUUID } from "crypto"
+import ServerActionRevalidate from "@/lib/RevalidateAction"
 
 export default function MyBoard () {
 
@@ -34,10 +35,10 @@ export default function MyBoard () {
 
     return (
         <main className="h-screen bg-red-100 flex flex-col">
-            <BoardList></BoardList>
+            <BoardList userProfile={user}></BoardList>
             <div className="flex flex-row justify-center">
                 <button className="bg-black text-white px-3 py-2 rounded"
-                onClick={() => {CreateBoard(board); window.location.reload();}}>
+                onClick={() => {CreateBoard(board); ServerActionRevalidate();}}>
                     Create Board
                 </button>
             </div>

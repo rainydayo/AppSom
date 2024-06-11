@@ -1,13 +1,3 @@
-export interface JSONData {
-    data: Sample[]
-}
-
-export interface Sample {
-    name: string,
-    field: string,
-    food: string
-}
-
 export interface User {
     id: string,
     name: string,
@@ -25,14 +15,16 @@ export interface Card {
     date_start: string,
     date_end: string,
     color: string,
-    member: User[]
+    member: User[],
+    list: string
 }
 
 export interface List {
     id: string,
     name: string,
     description: string,
-    cards: Card[]
+    cards: Card[],
+    board: string
 }
 
 export interface Board {
@@ -48,4 +40,12 @@ export interface Board {
 
 export interface BoardJSON {
     data: Board[]
+}
+
+export interface ListJSON {
+    data: List[]
+}
+
+export interface CardJSON {
+    data: Card[]
 }
