@@ -1,9 +1,8 @@
 export interface User {
     id: string,
     name: string,
-    email: string,
+    username: string,
     password: string,
-    tel: string,
     role: string,
     image: string,
 }
@@ -48,4 +47,8 @@ export interface ListJSON {
 
 export interface CardJSON {
     data: Card[]
+}
+
+export interface UserJSON {
+    data: User[]
 }

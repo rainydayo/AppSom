@@ -7,6 +7,8 @@ import { revalidateTag } from "next/cache"
 import CreateBoard from "@/lib/CreateBoard"
 import { randomUUID } from "crypto"
 import ServerActionRevalidate from "@/lib/RevalidateAction"
+import { ThemeProvider } from "@/components/ControlSystem/themeSet"
+import Sidebar from "@/components/ControlSystem/sideBar"
 
 export default function MyBoard () {
 
@@ -14,9 +16,8 @@ export default function MyBoard () {
     const user: User = {
         id: "ADMIN",
         name: "Jason",
-        email: "jason@jason.com",
+        username: "God",
         password: "12345678",
-        tel: "0987654321",
         role: "admin",
         image: ""
     }
@@ -34,7 +35,9 @@ export default function MyBoard () {
     
 
     return (
+        <ThemeProvider>
         <main className="h-screen bg-red-100 flex flex-col">
+            <Sidebar/>
             <BoardList userProfile={user}></BoardList>
             <div className="flex flex-row justify-center">
                 <button className="bg-black text-white px-3 py-2 rounded"
@@ -43,5 +46,6 @@ export default function MyBoard () {
                 </button>
             </div>
         </main>
+        </ThemeProvider>
     )
 }
