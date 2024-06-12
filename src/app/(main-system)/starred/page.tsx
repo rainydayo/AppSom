@@ -8,7 +8,7 @@ export default function StarredPage () {
 
     return (
         <ThemeProvider>
-        <main className="h-full bg-orange-50 ml-64">
+        <main className="h-full bg-somon ml-64">
             <BoardList starred={true}></BoardList>
         </main>
         </ThemeProvider>
