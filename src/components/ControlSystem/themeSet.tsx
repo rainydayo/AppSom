@@ -1,13 +1,14 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 
 const ThemeContext = createContext({
-  theme: { som: '#FF6B18' },
+  theme: { som: '#FF6B18', somon: '#FDEAE3' },
   changeTheme: (newColors: any) => {},
 });
 
 export const ThemeProvider = ({ children }: {children: React.ReactNode}) => {
-  const [theme, setTheme] = useState<{ som: string }>({
+  const [theme, setTheme] = useState<{ som: string, somon: string }>({
     som: '#FF6B18', // Default color
+    somon: '#FDEAE3', // Lighter color
   });
 
   useEffect(() => {
@@ -21,11 +22,25 @@ export const ThemeProvider = ({ children }: {children: React.ReactNode}) => {
     }
   }, []);
 
+  const lightenColor = (color: string, percent: number) => {
+    const num = parseInt(color.slice(1), 16),
+          amt = Math.round(2.55 * percent),
+          R = (num >> 16) + amt,
+          G = (num >> 8 & 0x00FF) + amt,
+          B = (num & 0x0000FF) + amt;
+    return `#${(0x1000000 + (R<255?R<1?0:R:255) * 0x10000 + (G<255?G<1?0:G:255) * 0x100 + (B<255?B<1?0:B:255))
+      .toString(16)
+      .slice(1).toUpperCase()}`;
+  };
+
   const changeTheme = (newColors: any) => {
-    setTheme(newColors);
-    localStorage.setItem('theme', JSON.stringify(newColors));
-    Object.keys(newColors).forEach(key => {
-      document.documentElement.style.setProperty(`--color-${key}`, newColors[key]);
+    const lighterSomon = lightenColor(newColors.som, 80);
+    const updatedColors = { ...newColors, somon: lighterSomon };
+
+    setTheme(updatedColors);
+    localStorage.setItem('theme', JSON.stringify(updatedColors));
+    Object.keys(updatedColors).forEach(key => {
+      document.documentElement.style.setProperty(`--color-${key}`, updatedColors[key]);
     });
   };
 

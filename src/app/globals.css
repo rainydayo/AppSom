@@ -37,6 +37,7 @@ body {
 
 :root {
   --color-som: #FF6B18; /* Default color */
+  --color-somon: #FDEAE3;
 }
 
 .bg-som {
@@ -46,4 +47,13 @@ body {
 .text-som {
   color: var(--color-som);
 }
+
+.bg-somon {
+  background-color: var(--color-somon);
+}
+
+.text-somon {
+  color: var(--color-somon);
+}
+
 
