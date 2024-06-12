@@ -1,35 +1,46 @@
+//app/auth/register/page.tsx
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import convertImgUrl from '@/components/ControlSystem/convertImgUrl';
 import Link from 'next/link';
 import { User } from '../../../../interface';
 import Register from '@/lib/Register';
 import bcrypt from 'bcryptjs';
+import convertImgUrl from '@/components/ControlSystem/convertImgUrl';
 
 export default function RegisterPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [profilePic, setProfilePic] = useState('');
+  const [profilePic, setProfilePic] = useState<File | null>(null);
   const [error, setError] = useState('');
 
   const router = useRouter();
   const logoUrl = 'https://drive.google.com/file/d/17ad4RrjEqQmKiwgwA0PmRLoadt1AiigI/view?usp=drive_link';
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setProfilePic(file);
+    }
+  };
+
   const register = async () => {
     try {
       const uuid = crypto.randomUUID();
       const hashedPassword = await bcrypt.hash(password, 10);
-      const user: User = {
-        id: uuid,
-        name: username,
-        username: username,
-        role: "USER",
-        image: profilePic,
-        password: hashedPassword
-      };
-      const response = await Register(user);
+
+      const formData = new FormData();
+      formData.append('id', uuid);
+      formData.append('name', username);
+      formData.append('username', username);
+      formData.append('role', 'USER');
+      formData.append('password', hashedPassword);
+      if (profilePic) {
+        formData.append('image', profilePic);
+      }
+
+      const response = await Register(formData);
       if (response.ok) {
         console.log('Registration successful');
         setError('');
@@ -40,7 +51,7 @@ export default function RegisterPage() {
       }
     } catch (err) {
       setError('Registration failed');
-      console.error("Error: ",err);
+      console.error("Error: ", err);
     }
   };
 
@@ -87,9 +98,8 @@ export default function RegisterPage() {
             </label>
             <input
               id="profilePic"
-              type="text"
-              value={profilePic}
-              onChange={(e) => setProfilePic(e.target.value)}
+              type="file"
+              onChange={handleFileChange}
               className="w-full px-4 py-6 mt-2 -mb-8 text-3xl text-gray-700 bg-white border-none rounded-md focus:outline-none focus:ring-2 focus:ring-som"
             />
           </div>
