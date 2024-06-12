@@ -639,7 +639,102 @@
       "id": "82110464-c9c4-4acc-96a5-7df5d8300264",
       "name": "My Board 3",
       "description": "This is my board 3",
-      "lists": [],
+      "lists": [
+        {
+          "id": "c2ff6343-e930-4f45-b3ef-80376fb69f95",
+          "name": "List 1",
+          "description": "To-do",
+          "cards": [
+            {
+              "id": "2381084d-42d1-4450-98b3-7f8f331b329c",
+              "name": "Card 1",
+              "description": "hehe",
+              "date_start": "today",
+              "date_end": "tomorrow",
+              "color": "",
+              "member": [],
+              "list": "c2ff6343-e930-4f45-b3ef-80376fb69f95"
+            },
+            {
+              "id": "9dcb1bd8-1a41-4243-b408-50f92d9976a3",
+              "name": "Card 1",
+              "description": "hehe",
+              "date_start": "today",
+              "date_end": "tomorrow",
+              "color": "",
+              "member": [],
+              "list": "c2ff6343-e930-4f45-b3ef-80376fb69f95"
+            }
+          ],
+          "board": "82110464-c9c4-4acc-96a5-7df5d8300264"
+        },
+        {
+          "id": "6d2b55bb-60ad-4f6f-bcb9-e512e94c0453",
+          "name": "List 1",
+          "description": "To-do",
+          "cards": [
+            {
+              "id": "f768a183-ccf2-4a0f-baf9-cbf35a0018b3",
+              "name": "Card 1",
+              "description": "hehe",
+              "date_start": "today",
+              "date_end": "tomorrow",
+              "color": "",
+              "member": [],
+              "list": "6d2b55bb-60ad-4f6f-bcb9-e512e94c0453"
+            },
+            {
+              "id": "497cbf6f-13f8-4d3f-949c-a9e24b153521",
+              "name": "Card 1",
+              "description": "hehe",
+              "date_start": "today",
+              "date_end": "tomorrow",
+              "color": "",
+              "member": [],
+              "list": "6d2b55bb-60ad-4f6f-bcb9-e512e94c0453"
+            },
+            {
+              "id": "70e2e06d-4835-4033-9502-d6b35a9d0167",
+              "name": "Card 1",
+              "description": "hehe",
+              "date_start": "today",
+              "date_end": "tomorrow",
+              "color": "",
+              "member": [],
+              "list": "6d2b55bb-60ad-4f6f-bcb9-e512e94c0453"
+            }
+          ],
+          "board": "82110464-c9c4-4acc-96a5-7df5d8300264"
+        },
+        {
+          "id": "d70fc188-36dd-43a4-8f13-d9806705c5ad",
+          "name": "List 1",
+          "description": "To-do",
+          "cards": [
+            {
+              "id": "5e4a9123-a3d5-4a2b-8b78-e93ac5e9d552",
+              "name": "Card 1",
+              "description": "hehe",
+              "date_start": "today",
+              "date_end": "tomorrow",
+              "color": "",
+              "member": [],
+              "list": "d70fc188-36dd-43a4-8f13-d9806705c5ad"
+            },
+            {
+              "id": "85a034ab-0fa9-4ce5-a317-0c27b4e1bf9c",
+              "name": "Card 1",
+              "description": "hehe",
+              "date_start": "today",
+              "date_end": "tomorrow",
+              "color": "",
+              "member": [],
+              "list": "d70fc188-36dd-43a4-8f13-d9806705c5ad"
+            }
+          ],
+          "board": "82110464-c9c4-4acc-96a5-7df5d8300264"
+        }
+      ],
       "favorite": true,
       "owner": {
         "id": "ADMIN",
