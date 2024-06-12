@@ -5,12 +5,18 @@ import convertImgUrl from './convertImgUrl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThLarge, faCalendarAlt, faStar, faEllipsisV, faCog } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 
 export default function Sidebar() {
   const { changeTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { data: session } = useSession();
+
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+
+  const toggleProfileMenu = () => {
+    setIsProfileMenuOpen(!isProfileMenuOpen);
+  };
 
   const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     changeTheme({ som: e.target.value });
@@ -42,25 +48,37 @@ export default function Sidebar() {
           </Link>
         </div>
         <hr className="border-white mb-4" />
-        <div className="flex justify-center mb-4">
+        <div className="flex justify-center mb-4 relative">
           {session && (
-            <div className="flex items-center p-2 bg-white rounded-lg w-full relative">
-              <div className="relative w-16 h-16">
-                <Image
-                  src={session.user.image || profilePicUrl}
-                  alt="Profile Picture"
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-full"
-                />
+            <>
+              <div className="flex items-center p-2 bg-white rounded-lg w-full">
+                <div className="relative w-16 h-16">
+                  <Image
+                    src={session.user.image || profilePicUrl}
+                    alt="Profile Picture"
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-full"
+                  />
+                </div>
+                <div className="ml-4">
+                  <div className="font-semibold text-black">{session.user.name}</div>
+                </div>
+                <button onClick={toggleProfileMenu} className="absolute top-2 right-2">
+                  <FontAwesomeIcon icon={faEllipsisV} className="text-black" />
+                </button>
               </div>
-              <div className="ml-4">
-                <div className="font-semibold text-black">{session.user.name}</div>
-              </div>
-              <div className="absolute top-2 right-2">
-                <FontAwesomeIcon icon={faEllipsisV} className="text-black" />
-              </div>
-            </div>
+              {isProfileMenuOpen && (
+                <div className="absolute right-0 top-12 mt-2 w-48 bg-white text-black p-4 rounded shadow-lg z-50">
+                  <Link href="/auth/edit-profile" className="block text-left mb-2 hover:bg-gray-200">
+                    Edit Profile
+                  </Link>
+                  <button onClick={() => signOut()} className="block text-center mb-2 hover:bg-gray-200">
+                    Log Out
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
         <ul>
