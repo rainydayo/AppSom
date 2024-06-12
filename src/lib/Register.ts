@@ -1,20 +1,36 @@
-import { User } from "../../interface";
-import GetDataFromJson from "./GetDataFromJson";
 
-export default async function Register(user: User) {
+export default async function Register(formData: FormData) {
+  const imageFile = formData.get('image') as File;
+  let imageUrl = '';
+
+  if (imageFile) {
+    const imageResponse = await fetch('/api/upload', {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (imageResponse.ok) {
+      const imageData = await imageResponse.json();
+      imageUrl = imageData.imageUrl;
+    } else {
+      const errorData = await imageResponse.json();
+      alert(`Failed to upload image: ${errorData.message}`);
+      return imageResponse;
+    }
+  }
+
+  formData.set('image', imageUrl);
+
   const response = await fetch('/api/auth/register', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(user)
+    body: JSON.stringify(Object.fromEntries(formData.entries())),
   });
-
-  console.log(JSON.stringify(user));
 
   if (response.ok) {
     alert("User added to JSON file");
-    console.log(user);
   } else {
     const errorData = await response.json();
     alert(`Failed to add user to JSON file: ${errorData.message}`);
