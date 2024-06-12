@@ -1,4 +1,4 @@
-export default async function (lid: string, bid: string) {
+export default async function DeleteListById (lid: string, bid: string) {
     const response = await fetch (`/api/delete-list`, {
         method: "DELETE",
         body: JSON.stringify({
