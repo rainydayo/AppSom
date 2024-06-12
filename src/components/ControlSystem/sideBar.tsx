@@ -38,9 +38,9 @@ export default function Sidebar(){
           </div>
         </div>
         <ul>
-          <li className="mb-2"><a href="#" className="text-white">Board</a></li>
+          <li className="mb-2"><a href="/board" className="text-white">Board</a></li>
           <li className="mb-2"><a href="#" className="text-white">Calendar</a></li>
-          <li className="mb-2"><a href="#" className="text-white">Starred</a></li>
+          <li className="mb-2"><a href="/starred" className="text-white">Starred</a></li>
         </ul>
       </div>
       <div>

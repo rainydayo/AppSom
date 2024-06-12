@@ -12,12 +12,12 @@ export default async function CreateBoard(board: Board) {
 
     console.log(JSON.stringify(board));
 
-    if (response.ok) {
-        alert("Board created and saved to JSON file");
-        console.log(board);
-    } else {
-        alert("Failed to save the board to JSON file");
-    }
+    // if (response.ok) {
+    //     alert("Board created and saved to JSON file");
+    //     console.log(board);
+    // } else {
+    //     alert("Failed to save the board to JSON file");
+    // }
     const boardData = await GetDataFromJson('Storage/Board/board.json');
     console.log(boardData);
 }

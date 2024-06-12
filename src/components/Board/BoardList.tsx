@@ -2,7 +2,7 @@
 
 import { useAppSelector } from "@/redux/store"
 import { useEffect, useState } from "react"
-import { Board, Card, List, User } from "../../../interface"
+import { Board, BoardJSON, Card, List, User } from "../../../interface"
 import GetBoards from "@/lib/GetBoards";
 import DeleteBoardById from "@/lib/DeleteBoardById";
 import CreateList from "@/lib/CreateList";
@@ -10,104 +10,62 @@ import DeleteListById from "@/lib/DeleteListById";
 import CreateCard from "@/lib/CreateCard";
 import DeleteCardById from "@/lib/DeleteCardById";
 import ServerActionRevalidate from "@/lib/RevalidateAction";
+import CreateBoard from "@/lib/CreateBoard";
+import Link from "next/link";
 
-export default function BoardList ({userProfile} : {userProfile : User}) {
+export default function BoardList ({starred} : {starred: boolean}) {
     //const boards = useAppSelector((state) => state.reduxPersistedReducer.boardSlice.boards);
     const [boards, setBoards] = useState<Board[]>([]);
     useEffect(() => {
         const LoadBoards = async () => {
-            const data = await GetBoards();
-            setBoards(data.data);
+            const data: BoardJSON = await GetBoards();
+            setBoards(data.data.filter(b => b.favorite === starred));
         }
+        setTimeout(() => {
+
+        }, 1000);
         LoadBoards();
     },[boards]);
 
-    var uuid = crypto.randomUUID();
-
-    const makeList = (bid: string) => {
-        const list:List = {
-            id: uuid,
-            name: "List 1",
-            description: "To-do",
-            cards: [],
-            board: bid
-        }
-        return list;
+    const user: User = {
+        id: "ADMIN",
+        name: "Jason",
+        username: "God",
+        password: "12345678",
+        role: "admin",
+        image: ""
     }
-
-    var uuid2 = crypto.randomUUID();
-
-    const makeCard = (lid: string) => {
-        const card: Card = {
-            id: uuid2,
-            name: "Card 1",
-            description: "hehe",
-            date_start: "today",
-            date_end: "tomorrow",
-            color: "",
-            member: [userProfile],
-            list: lid
-        }
-        return card;
+    const uuid = crypto.randomUUID();
+    const board: Board = {
+        id: uuid,
+        name: "My Board 3",
+        description: "This is my board 3",
+        lists: [],
+        favorite: false,
+        owner: user,
+        member: [user],
+        color: ""
     }
 
     return (
-        <div>
+        <div className="flex flex-wrap flex-row justify-start gap-10 p-10">
+            <div className="bg-orange-400 rounded w-[300px] h-[150px]">
+                <button className="w-full h-full p-5" onClick={() => {CreateBoard(board);}}>
+                    <h1 className="text-white font-semibold">Create Board</h1>
+                </button>
+            </div>
             {
                 boards.length > 0 ? 
                     boards.map((b) => 
-                        <div key={b.id} className="bg-slate-200 rounded p-3">
-                            <h1>
-                                Name: {b.name}
-                            </h1>
-                            <h2>
-                                Description: {b.description}
-                            </h2>
-                            <h3>
-                                Favorite: {b.favorite? "True" : "False"}
-                            </h3>
-                            <h3>
-                                Lists: 
-                                
-                                {b.lists.map((l) => 
-                                    <div key={l.id}>
-                                        <p>- {l.name}</p>
-                                        <p>---- {l.description}</p>
-                                        <p>Card: {l.cards.map((c) => 
-                                            <div key={c.id}>
-                                                
-                                                {c.name + " "}
-                                                
-                                                <button className="px-3 py-2 bg-black text-white rounded" onClick={() => {DeleteCardById(c.id, l.id, b.id); ServerActionRevalidate();}}>Delete Card</button>
-                                            </div>)}
-                                        </p>
-                                        <button className="px-3 py-2 bg-blue-500 text-white rounded" onClick={() => {CreateCard(makeCard(l.id), l.id, b.id); ServerActionRevalidate();}}>
-                                            Add Card
-                                        </button>
-                                        <button className="px-3 py-2 bg-red-600 text-white rounded" onClick={() => {DeleteListById(l.id, b.id); ServerActionRevalidate();}}>
-                                            Delete List 
-                                        </button>
-                                    </div>
-                                )}
-                            </h3>
-                            <button className="px-3 py-2 bg-green-500 text-white rounded" onClick={() => {CreateList(makeList(b.id), b.id); ServerActionRevalidate();}}>
-                                Add List
-                            </button>
-                            <h3>
-                                Owner: {b.owner? b.owner.name : "none"}
-                            </h3>
-                            <h3>
-                                Members: {b.member.map((m) => <p key={m.id}>- {m.name}</p>)}
-                            </h3>
-                            
-                            <button className="px-3 py-2 bg-red-600 text-white rounded" onClick={() => {DeleteBoardById(b.id); ServerActionRevalidate();}}>
-                                Delete Board
-                            </button>
+                        <div key={b.id} className="bg-orange-500 rounded w-[300px] h-[150px]">
+                            <Link href={`/board/${b.id}`}>
+                                <button className="w-full h-full p-5">
+                                    <h1 className="text-white font-semibold">{b.name}</h1>
+                                </button>
+                            </Link>
                         </div>
                     ) : 
-                    <div>
-                        No boards
-                    </div>
+                    null
             }
         </div>
     )
