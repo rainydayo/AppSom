@@ -1,14 +1,15 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 
 const ThemeContext = createContext({
-  theme: { som: '#FF6B18', somon: '#FDEAE3' },
+  theme: { som: '#FF6B18', somon: '#FDEAE3', sombar: '#FAA88A' },
   changeTheme: (newColors: any) => {},
 });
 
 export const ThemeProvider = ({ children }: {children: React.ReactNode}) => {
-  const [theme, setTheme] = useState<{ som: string, somon: string }>({
+  const [theme, setTheme] = useState<{ som: string, somon: string, sombar: string }>({
     som: '#FF6B18', // Default color
     somon: '#FDEAE3', // Lighter color
+    sombar: '#FAA88A', // Darker color
   });
 
   useEffect(() => {
@@ -33,10 +34,20 @@ export const ThemeProvider = ({ children }: {children: React.ReactNode}) => {
       .slice(1).toUpperCase()}`;
   };
 
-  const changeTheme = (newColors: any) => {
-    const lighterSomon = lightenColor(newColors.som, 80);
-    const updatedColors = { ...newColors, somon: lighterSomon };
 
+  const changeTheme = (newColors: any) => {
+    let lighterSomon;
+  let darkerSombar;
+
+  if (newColors.som === '#FF6B18') {
+    lighterSomon = '#FDEAE3';
+    darkerSombar = '#FAA88A';
+  } else {
+    lighterSomon = lightenColor(newColors.som, 60);
+    darkerSombar = lightenColor(newColors.som, 30);
+  }
+
+  const updatedColors = { ...newColors, somon: lighterSomon, sombar: darkerSombar };
     setTheme(updatedColors);
     localStorage.setItem('theme', JSON.stringify(updatedColors));
     Object.keys(updatedColors).forEach(key => {

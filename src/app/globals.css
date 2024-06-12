@@ -38,6 +38,7 @@ body {
 :root {
   --color-som: #FF6B18; /* Default color */
   --color-somon: #FDEAE3;
+  --color-sombar: #FAA88A;
 }
 
 .bg-som {
@@ -56,4 +57,10 @@ body {
   color: var(--color-somon);
 }
 
+.bg-sombar {
+  background-color: var(--color-sombar);
+}
 
+.text-sombar {
+  color: var(--color-sombar);
+}

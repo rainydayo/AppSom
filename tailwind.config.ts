@@ -18,7 +18,8 @@ const config: Config = {
       },
       colors: {
         "som": 'var(--color-som, #FF6B18)',
-        "somon": 'var(--color-somon, #FDEAE3)'
+        "somon": 'var(--color-somon, #FDEAE3)',
+        "sombar": 'var(--color-somon, #FAA88A)'
       }
     },
   },
