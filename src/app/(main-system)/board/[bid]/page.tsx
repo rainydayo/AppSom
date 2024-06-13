@@ -8,6 +8,7 @@ import CreateList from "@/lib/CreateList";
 import ServerActionRevalidate from "@/lib/RevalidateAction";
 import DeleteListById from "@/lib/DeleteListById";
 import CardList from "@/components/Board/CardList";
+import Image from "next/image";
 
 export default function BoardIdPage ({params} : {params: {bid : string}}) {
     const [board, setBoard] = useState<Board | null>();
@@ -67,7 +68,10 @@ export default function BoardIdPage ({params} : {params: {bid : string}}) {
                 {
                     lists.map((l) => 
                         <div key={l.id} className="rounded bg-[#EFEFEF] p-5 w-[200px] flex flex-col shadow-xl">
-                            <h1 className="font-bold text-left text-xl mb-2">{l.name}</h1>
+                            <div className="flex flex-row justify-between items-center mb-2">
+                                <h1 className="font-bold text-left text-xl">{l.name}</h1>
+                                <Image src="/Image/dotdotdot.png" alt="Edit" width={40} height={30}/>
+                            </div>
                             <CardList list={l} />
                         </div>
                     )
