@@ -1,5 +1,197 @@
 {
   "data": [
+    
+    {
+      "id": "board1",
+      "name": "Project Board",
+      "description": "This is a project board.",
+      "lists": [
+        {
+          "id": "list1",
+          "name": "To Do",
+          "description": "Tasks to be done",
+          "cards": [
+            {
+              "id": "card1",
+              "name": "Task 1",
+              "description": "This is the first task.",
+              "date_start": "2024-06-10",
+              "date_end": "2024-06-13",
+              "color": "#FF5733",
+              "member": [
+                {
+                  "id": "1",
+                  "name": "User 1",
+                  "email": "user1@example.com"
+                }
+              ],
+              "list": "list1"
+            },
+            {
+              "id": "card2",
+              "name": "Task 2",
+              "description": "This is the second task.",
+              "date_start": "2024-06-12",
+              "date_end": "2024-06-15",
+              "color": "#33FF57",
+              "member": [
+                {
+                  "id": "1",
+                  "name": "User 1",
+                  "email": "user1@example.com"
+                },
+                {
+                  "id": "2",
+                  "name": "User 2",
+                  "email": "user2@example.com"
+                }
+              ],
+              "list": "list1"
+            }
+          ],
+          "board": "board1"
+        },
+        {
+          "id": "list2",
+          "name": "In Progress",
+          "description": "Tasks in progress",
+          "cards": [
+            {
+              "id": "card3",
+              "name": "Task 3",
+              "description": "This is the third task.",
+              "date_start": "2024-06-14",
+              "date_end": "2024-06-18",
+              "color": "#3357FF",
+              "member": [
+                {
+                  "id": "1",
+                  "name": "User 1",
+                  "email": "user1@example.com"
+                }
+              ],
+              "list": "list2"
+            }
+          ],
+          "board": "board1"
+        }
+      ],
+      "favorite": false,
+      "owner": {
+        "id": "1",
+        "name": "User 1",
+        "email": "user1@example.com"
+      },
+      "member": [
+        {
+          "id": "1",
+          "name": "User 1",
+          "email": "user1@example.com"
+        },
+        {
+          "id": "2",
+          "name": "User 2",
+          "email": "user2@example.com"
+        }
+      ],
+      "color": "#FFA500"
+    },{
+      "id": "board2",
+      "name": "Development Board",
+      "description": "This is a development board.",
+      "lists": [
+        {
+          "id": "list3",
+          "name": "Backlog",
+          "description": "Backlog tasks",
+          "cards": [
+            {
+              "id": "card4",
+              "name": "Task 4",
+              "description": "This is the fourth task.",
+              "date_start": "2024-06-11",
+              "date_end": "2024-06-14",
+              "color": "#FF5733",
+              "member": [
+                {
+                  "id": "1",
+                  "name": "User 1",
+                  "email": "user1@example.com"
+                }
+              ],
+              "list": "list3"
+            },
+            {
+              "id": "card5",
+              "name": "Task 5",
+              "description": "This is the fifth task.",
+              "date_start": "2024-06-13",
+              "date_end": "2024-06-16",
+              "color": "#33FF57",
+              "member": [
+                {
+                  "id": "1",
+                  "name": "User 1",
+                  "email": "user1@example.com"
+                },
+                {
+                  "id": "2",
+                  "name": "User 2",
+                  "email": "user2@example.com"
+                }
+              ],
+              "list": "list3"
+            }
+          ],
+          "board": "board2"
+        },
+        {
+          "id": "list4",
+          "name": "In Review",
+          "description": "Tasks under review",
+          "cards": [
+            {
+              "id": "card6",
+              "name": "Task 6",
+              "description": "This is the sixth task.",
+              "date_start": "2024-06-15",
+              "date_end": "2024-06-18",
+              "color": "#3357FF",
+              "member": [
+                {
+                  "id": "1",
+                  "name": "User 1",
+                  "email": "user1@example.com"
+                }
+              ],
+              "list": "list4"
+            }
+          ],
+          "board": "board2"
+        }
+      ],
+      "favorite": true,
+      "owner": {
+        "id": "2",
+        "name": "User 2",
+        "email": "user2@example.com"
+      },
+      "member": [
+        {
+          "id": "1",
+          "name": "User 1",
+          "email": "user1@example.com"
+        },
+        {
+          "id": "2",
+          "name": "User 2",
+          "email": "user2@example.com"
+        }
+      ],
+      "color": "#FF5733"
+    },
+    
+
     {
       "id": "82af7b34-9d92-4ad3-9277-7a767f318deb",
       "name": "My Board 3",
