@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import { useState, useEffect } from 'react';
-import { Board, BoardJSON, Card, User } from '../../../interface';
+import { Board, BoardJSON, Card } from '../../../interface';
 import GetBoards from '@/lib/GetBoards';
 
 const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -23,7 +23,7 @@ const filterCardsByUserAndBoard = (boards: Board[], userId: string) => {
   boards.forEach((board) => {
     board.lists.forEach((list) => {
       list.cards.forEach((card) => {
-        if (card.member.some((member: User) => member.id === userId)) {
+        if (card.member.includes(userId)) {
           filteredCards.push({ ...card, boardName: board.name });
         }
       });
@@ -152,8 +152,8 @@ const TaskDateTable = ({ dates, cards }: TaskDateTableProps) => (
 
 export default function Calendar() {
   const { data: session } = useSession();
-  //const userId: string | undefined = session?.user?.id;
-  const userId: string | undefined = "1";
+  const userId: string | undefined = session?.user?.id;
+  //const userId: string | undefined = "75c8ba78-d371-4ff6-be29-1139cfebf33c";
 
   const [boards, setBoards] = useState<Board[]>([]);
   const [selectedBoards, setSelectedBoards] = useState<string[]>([]);
@@ -165,18 +165,17 @@ export default function Calendar() {
 
   useEffect(() => {
     const LoadBoards = async () => {
+      if (!userId) return;
+
       const data: BoardJSON = await GetBoards();
       const filteredBoards = data.data.filter((board) =>
-        board.member.some((member) => member.id === userId)
+        board.member.includes(userId)
       );
       setBoards(filteredBoards);
     };
 
-    if (userId) {
-      LoadBoards();
-    }
+    LoadBoards();
   }, [userId]);
-
   useEffect(() => {
     setDates(getWeekDates(startDate));
     setSelectedMonth(startDate);
@@ -231,8 +230,6 @@ export default function Calendar() {
   const toggleBoardSelect = () => {
     setShowBoardSelect(!showBoardSelect);
   };
-
-  console.log(cards);
 
   return (
     <div className="h-full bg-somon ml-64">

@@ -18,11 +18,7 @@
               "date_end": "2024-06-13",
               "color": "#FF5733",
               "member": [
-                {
-                  "id": "1",
-                  "name": "User 1",
-                  "email": "user1@example.com"
-                }
+                "75c8ba78-d371-4ff6-be29-1139cfebf33c"
               ],
               "list": "list1"
             },
@@ -34,16 +30,8 @@
               "date_end": "2024-06-15",
               "color": "#33FF57",
               "member": [
-                {
-                  "id": "1",
-                  "name": "User 1",
-                  "email": "user1@example.com"
-                },
-                {
-                  "id": "2",
-                  "name": "User 2",
-                  "email": "user2@example.com"
-                }
+                "75c8ba78-d371-4ff6-be29-1139cfebf33c",
+                "2"
               ],
               "list": "list1"
             }
@@ -63,11 +51,7 @@
               "date_end": "2024-06-18",
               "color": "#3357FF",
               "member": [
-                {
-                  "id": "1",
-                  "name": "User 1",
-                  "email": "user1@example.com"
-                }
+                "75c8ba78-d371-4ff6-be29-1139cfebf33c"
               ],
               "list": "list2"
             }
@@ -76,22 +60,10 @@
         }
       ],
       "favorite": false,
-      "owner": {
-        "id": "1",
-        "name": "User 1",
-        "email": "user1@example.com"
-      },
+      "owner": "75c8ba78-d371-4ff6-be29-1139cfebf33c",
       "member": [
-        {
-          "id": "1",
-          "name": "User 1",
-          "email": "user1@example.com"
-        },
-        {
-          "id": "2",
-          "name": "User 2",
-          "email": "user2@example.com"
-        }
+        "75c8ba78-d371-4ff6-be29-1139cfebf33c",
+        "2"
       ],
       "color": "#FFA500"
     },
@@ -113,11 +85,7 @@
               "date_end": "2024-06-14",
               "color": "#FF5733",
               "member": [
-                {
-                  "id": "1",
-                  "name": "User 1",
-                  "email": "user1@example.com"
-                }
+                "75c8ba78-d371-4ff6-be29-1139cfebf33c"
               ],
               "list": "list3"
             },
@@ -129,16 +97,8 @@
               "date_end": "2024-06-16",
               "color": "#33FF57",
               "member": [
-                {
-                  "id": "1",
-                  "name": "User 1",
-                  "email": "user1@example.com"
-                },
-                {
-                  "id": "2",
-                  "name": "User 2",
-                  "email": "user2@example.com"
-                }
+                "75c8ba78-d371-4ff6-be29-1139cfebf33c",
+                "2"
               ],
               "list": "list3"
             }
@@ -158,11 +118,7 @@
               "date_end": "2024-06-18",
               "color": "#3357FF",
               "member": [
-                {
-                  "id": "1",
-                  "name": "User 1",
-                  "email": "user1@example.com"
-                }
+                "75c8ba78-d371-4ff6-be29-1139cfebf33c"
               ],
               "list": "list4"
             }
@@ -171,22 +127,10 @@
         }
       ],
       "favorite": true,
-      "owner": {
-        "id": "2",
-        "name": "User 2",
-        "email": "user2@example.com"
-      },
+      "owner": "2",
       "member": [
-        {
-          "id": "1",
-          "name": "User 1",
-          "email": "user1@example.com"
-        },
-        {
-          "id": "2",
-          "name": "User 2",
-          "email": "user2@example.com"
-        }
+        "75c8ba78-d371-4ff6-be29-1139cfebf33c",
+        "2"
       ],
       "color": "#FF5733"
     },
