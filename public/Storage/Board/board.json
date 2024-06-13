@@ -1,6 +1,5 @@
 {
   "data": [
-    
     {
       "id": "board1",
       "name": "Project Board",
@@ -95,7 +94,8 @@
         }
       ],
       "color": "#FFA500"
-    },{
+    },
+    {
       "id": "board2",
       "name": "Development Board",
       "description": "This is a development board.",
@@ -190,8 +190,6 @@
       ],
       "color": "#FF5733"
     },
-    
-
     {
       "id": "0f967e94-315d-467d-ad3f-448ee53901f5",
       "name": "My Board 3",
@@ -302,6 +300,64 @@
       "description": "This is my board 3",
       "lists": [],
       "favorite": true,
+      "owner": "3a99518f-08ef-45e7-bb4d-6e9d3ce9f4a0",
+      "member": [
+        "3a99518f-08ef-45e7-bb4d-6e9d3ce9f4a0"
+      ],
+      "color": ""
+    },
+    {
+      "id": "6dbd0a1a-b5fe-41ea-adac-595023b5c43d",
+      "name": "My Board 3",
+      "description": "This is my board 3",
+      "lists": [],
+      "favorite": false,
+      "owner": "3a99518f-08ef-45e7-bb4d-6e9d3ce9f4a0",
+      "member": [
+        "3a99518f-08ef-45e7-bb4d-6e9d3ce9f4a0"
+      ],
+      "color": ""
+    },
+    {
+      "id": "d4ce155f-1556-49f4-b08e-56572bc055bc",
+      "name": "My Board 3",
+      "description": "This is my board 3",
+      "lists": [],
+      "favorite": false,
+      "owner": "3a99518f-08ef-45e7-bb4d-6e9d3ce9f4a0",
+      "member": [
+        "3a99518f-08ef-45e7-bb4d-6e9d3ce9f4a0"
+      ],
+      "color": ""
+    },
+    {
+      "id": "fd7520b2-03ac-42ea-9959-ea6d62c2ab65",
+      "name": "My Board 3",
+      "description": "This is my board 3",
+      "lists": [
+        {
+          "id": "fe9a6fbf-4e28-4b17-a430-17ecf3ead22e",
+          "name": "To-Do",
+          "description": "To-Do List",
+          "cards": [],
+          "board": "fd7520b2-03ac-42ea-9959-ea6d62c2ab65"
+        },
+        {
+          "id": "1aa05915-9bb2-4c77-ad28-f539c81317da",
+          "name": "Doing",
+          "description": "Doing List",
+          "cards": [],
+          "board": "fd7520b2-03ac-42ea-9959-ea6d62c2ab65"
+        },
+        {
+          "id": "e9bca1cf-8fe9-4792-b47d-39fbd39bd196",
+          "name": "Done",
+          "description": "Doing List",
+          "cards": [],
+          "board": "fd7520b2-03ac-42ea-9959-ea6d62c2ab65"
+        }
+      ],
+      "favorite": false,
       "owner": "3a99518f-08ef-45e7-bb4d-6e9d3ce9f4a0",
       "member": [
         "3a99518f-08ef-45e7-bb4d-6e9d3ce9f4a0"
