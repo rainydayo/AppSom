@@ -14,7 +14,7 @@ export interface Card {
     date_start: string,
     date_end: string,
     color: string,
-    member: User[],
+    member: string[],
     list: string
 }
 
