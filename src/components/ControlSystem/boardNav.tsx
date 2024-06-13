@@ -41,7 +41,7 @@ export default function BoardNav ({board} : {board: Board}) {
             <div className="flex flex-row gap-3">
                 <div className="flex flex-row gap-2 items-center bg-gray-300 py-2 px-3 rounded">
                     <Image src="/Image/member.png" alt="Member" width={32} height={32}/>
-                    <div>Member</div>
+                    <div className="font-semibold">Member</div>
                 </div>
                 <Image src="/Image/edit.png" alt="Edit" width={50} height={50}/>
                 <Image src="/Image/delete.png" alt="Delete" width={50} height={50}/>

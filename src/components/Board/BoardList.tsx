@@ -1,23 +1,25 @@
 'use client';
 
-import { useAppSelector } from "@/redux/store";
 import { useEffect, useState } from "react";
-import { Board, BoardJSON, List, User } from "../../../interface";
+import { Board, BoardJSON, List } from "../../../interface";
 import GetBoards from "@/lib/GetBoards";
 import CreateBoard from "@/lib/CreateBoard";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import CreateList from "@/lib/CreateList";
+import AddBoardPopup from "./AddBoardPopup";
 
 export default function BoardList({ starred }: { starred: boolean }) {
     const [boards, setBoards] = useState<Board[]>([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [sortOrder, setSortOrder] = useState("a-z");
-    const {data: session} = useSession();
+    const [showPopup, setShowPopup] = useState(false);
+    const { data: session } = useSession();
 
     if (!session) {
         return null;
     }
+
     useEffect(() => {
         const LoadBoards = async () => {
             const data: BoardJSON = await GetBoards();
@@ -39,23 +41,6 @@ export default function BoardList({ starred }: { starred: boolean }) {
         board.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-
-    const uuid = crypto.randomUUID();
-    const uuid_l_1 = crypto.randomUUID();
-    const uuid_l_2 = crypto.randomUUID();
-    const uuid_l_3 = crypto.randomUUID();
-
-    const board: Board = {
-        id: crypto.randomUUID(),
-        name: "My Board 3",
-        description: "This is my board 3",
-        lists: [],
-        favorite: starred,
-        owner: session.user.id,
-        member: [session.user.id],
-        color: ""
-    };
-
     const createTemplateList = async (bid: string) => {
         const to_do: List = {
             id: crypto.randomUUID(),
@@ -74,7 +59,7 @@ export default function BoardList({ starred }: { starred: boolean }) {
         const done: List = {
             id: crypto.randomUUID(),
             name: "Done",
-            description: "Doing List",
+            description: "Done List",
             cards: [],
             board: bid
         }
@@ -82,7 +67,21 @@ export default function BoardList({ starred }: { starred: boolean }) {
         await CreateList(doing, bid);
         await CreateList(done, bid);
     }
-    
+
+    const handleCreateBoard = async (name: string, description: string) => {
+        const newBoard: Board = {
+            id: crypto.randomUUID(),
+            name,
+            description,
+            lists: [],
+            favorite: starred,
+            owner: session.user.id,
+            member: [session.user.id],
+            color: ""
+        };
+        await CreateBoard(newBoard);
+        await createTemplateList(newBoard.id);
+    };
 
     return (
         <div className="flex flex-col">
@@ -113,7 +112,7 @@ export default function BoardList({ starred }: { starred: boolean }) {
             </div>
             <div className="flex flex-wrap flex-row justify-start gap-10 p-10">
                 <div className="bg-orange-400 rounded w-[300px] h-[150px]">
-                    <button className="w-full h-full p-5" onClick={() => { CreateBoard(board); createTemplateList(board.id); }}>
+                    <button className="w-full h-full p-5" onClick={() => setShowPopup(true)}>
                         <h1 className="text-white font-semibold">Create Board</h1>
                     </button>
                 </div>
@@ -130,6 +129,13 @@ export default function BoardList({ starred }: { starred: boolean }) {
                     null
                 }
             </div>
+
+            {showPopup && (
+                <AddBoardPopup 
+                    onClose={() => setShowPopup(false)}
+                    onSave={handleCreateBoard}
+                />
+            )}
         </div>
     );
 }
