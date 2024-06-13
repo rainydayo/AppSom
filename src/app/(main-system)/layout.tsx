@@ -1,5 +1,6 @@
 'use client'
 import Sidebar from "@/components/ControlSystem/sideBar";
+import { ThemeProvider } from "@/components/ControlSystem/themeSet";
 
 export default function RootLayout({
   children,
@@ -8,8 +9,10 @@ export default function RootLayout({
 }>) {
   return (
     <>
+    <ThemeProvider>
         <Sidebar/>
         {children}
+    </ThemeProvider>
     </>
   );
 }

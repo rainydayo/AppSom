@@ -1,10 +1,8 @@
-//app/auth/register/page.tsx
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { User } from '../../../../interface';
 import Register from '@/lib/Register';
 import bcrypt from 'bcryptjs';
 import convertImgUrl from '@/components/ControlSystem/convertImgUrl';

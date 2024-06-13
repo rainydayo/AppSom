@@ -1,31 +1,37 @@
-'use client'
+'use client';
 
-import { useAppSelector } from "@/redux/store"
-import { useEffect, useState } from "react"
-import { Board, BoardJSON, Card, List, User } from "../../../interface"
+import { useAppSelector } from "@/redux/store";
+import { useEffect, useState } from "react";
+import { Board, BoardJSON, User } from "../../../interface";
 import GetBoards from "@/lib/GetBoards";
-import DeleteBoardById from "@/lib/DeleteBoardById";
-import CreateList from "@/lib/CreateList";
-import DeleteListById from "@/lib/DeleteListById";
-import CreateCard from "@/lib/CreateCard";
-import DeleteCardById from "@/lib/DeleteCardById";
-import ServerActionRevalidate from "@/lib/RevalidateAction";
 import CreateBoard from "@/lib/CreateBoard";
 import Link from "next/link";
 
-export default function BoardList ({starred} : {starred: boolean}) {
-    //const boards = useAppSelector((state) => state.reduxPersistedReducer.boardSlice.boards);
+export default function BoardList({ starred }: { starred: boolean }) {
     const [boards, setBoards] = useState<Board[]>([]);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [sortOrder, setSortOrder] = useState("a-z");
+
     useEffect(() => {
         const LoadBoards = async () => {
             const data: BoardJSON = await GetBoards();
-            setBoards(data.data.filter(b => b.favorite === starred));
-        }
-        setTimeout(() => {
-
-        }, 1000);
+            const filteredBoards = data.data.filter(b => b.favorite === starred);
+            setBoards(filteredBoards);
+        };
         LoadBoards();
-    },[boards]);
+    }, [starred]);
+
+    const sortedBoards = [...boards].sort((a, b) => {
+        if (sortOrder === "a-z") {
+            return a.name.localeCompare(b.name);
+        } else {
+            return b.name.localeCompare(a.name);
+        }
+    });
+
+    const filteredBoards = sortedBoards.filter(board =>
+        board.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     const user: User = {
         id: "ADMIN",
@@ -34,8 +40,10 @@ export default function BoardList ({starred} : {starred: boolean}) {
         password: "12345678",
         role: "admin",
         image: ""
-    }
+    };
+
     const uuid = crypto.randomUUID();
+
     const board: Board = {
         id: uuid,
         name: "My Board 3",
@@ -45,18 +53,43 @@ export default function BoardList ({starred} : {starred: boolean}) {
         owner: user,
         member: [user],
         color: ""
-    }
+    };
 
     return (
-        <div className="flex flex-wrap flex-row justify-start gap-10 p-10">
-            <div className="bg-orange-400 rounded w-[300px] h-[150px]">
-                <button className="w-full h-full p-5" onClick={() => {CreateBoard(board);}}>
-                    <h1 className="text-white font-semibold">Create Board</h1>
-                </button>
+        <div className="flex flex-col">
+            <div className="p-10 text-3xl font-bold">
+                Board
             </div>
-            {
-                boards.length > 0 ? 
-                    boards.map((b) => 
+            <div className="flex flex-row px-10 font-semibold text-xl justify-between">
+                <div>
+                    <div className="pb-2">Sort By</div>
+                    <select 
+                        className="px-16 py-2 rounded border-2 border-gray-500"
+                        onChange={(e) => setSortOrder(e.target.value)} 
+                        value={sortOrder} >
+                            <option value="a-z">A-Z</option>
+                            <option value="z-a">Z-A</option>
+                    </select>
+                </div>
+                <div>
+                    <div className="pb-2">Search</div>
+                    <input 
+                        className="px-1 py-2 rounded border-2 border-gray-500"
+                        type="text"
+                        placeholder="Search boards.."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                </div>
+            </div>
+            <div className="flex flex-wrap flex-row justify-start gap-10 p-10">
+                <div className="bg-orange-400 rounded w-[300px] h-[150px]">
+                    <button className="w-full h-full p-5" onClick={() => { CreateBoard(board); }}>
+                        <h1 className="text-white font-semibold">Create Board</h1>
+                    </button>
+                </div>
+                {filteredBoards.length > 0 ? 
+                    filteredBoards.map((b) => 
                         <div key={b.id} className="bg-orange-500 rounded w-[300px] h-[150px]">
                             <Link href={`/board/${b.id}`}>
                                 <button className="w-full h-full p-5">
@@ -66,7 +99,8 @@ export default function BoardList ({starred} : {starred: boolean}) {
                         </div>
                     ) : 
                     null
-            }
+                }
+            </div>
         </div>
-    )
+    );
 }

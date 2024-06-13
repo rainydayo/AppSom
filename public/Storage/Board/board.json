@@ -811,6 +811,32 @@
         }
       ],
       "color": ""
+    },
+    {
+      "id": "ea0cbb1c-3222-4cc5-82b4-78fa435c7873",
+      "name": "My Board 3",
+      "description": "This is my board 3",
+      "lists": [],
+      "favorite": false,
+      "owner": {
+        "id": "ADMIN",
+        "name": "Jason",
+        "username": "God",
+        "password": "12345678",
+        "role": "admin",
+        "image": ""
+      },
+      "member": [
+        {
+          "id": "ADMIN",
+          "name": "Jason",
+          "username": "God",
+          "password": "12345678",
+          "role": "admin",
+          "image": ""
+        }
+      ],
+      "color": ""
     }
   ]
 }

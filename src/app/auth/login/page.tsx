@@ -27,7 +27,7 @@ export default function SignIn() {
       console.error('Sign in error:', result.error);
       setError('Invalid username or password');
     }else if (result && !result.error) {
-      router.push('/');
+      router.push('/board');
     }
   };
 
