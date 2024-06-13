@@ -22,7 +22,7 @@ export async function PUT(req: Request) {
             return NextResponse.json({ message: 'Board not found' }, {status: 404});
         }
 
-        jsonData.data[idx] = obj.board;
+        jsonData.data[idx] = obj.data;
 
         fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 2));
 

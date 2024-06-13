@@ -6,12 +6,17 @@ import { Board, BoardJSON, User } from "../../../interface";
 import GetBoards from "@/lib/GetBoards";
 import CreateBoard from "@/lib/CreateBoard";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 export default function BoardList({ starred }: { starred: boolean }) {
     const [boards, setBoards] = useState<Board[]>([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [sortOrder, setSortOrder] = useState("a-z");
+    const {data: session} = useSession();
 
+    if (!session) {
+        return null;
+    }
     useEffect(() => {
         const LoadBoards = async () => {
             const data: BoardJSON = await GetBoards();
@@ -19,7 +24,7 @@ export default function BoardList({ starred }: { starred: boolean }) {
             setBoards(filteredBoards);
         };
         LoadBoards();
-    }, [starred]);
+    }, [starred, boards]);
 
     const sortedBoards = [...boards].sort((a, b) => {
         if (sortOrder === "a-z") {
@@ -33,14 +38,6 @@ export default function BoardList({ starred }: { starred: boolean }) {
         board.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    const user: User = {
-        id: "ADMIN",
-        name: "Jason",
-        username: "God",
-        password: "12345678",
-        role: "admin",
-        image: ""
-    };
 
     const uuid = crypto.randomUUID();
 
@@ -49,9 +46,9 @@ export default function BoardList({ starred }: { starred: boolean }) {
         name: "My Board 3",
         description: "This is my board 3",
         lists: [],
-        favorite: false,
-        owner: user,
-        member: [user],
+        favorite: starred,
+        owner: session.user.id,
+        member: [session.user.id],
         color: ""
     };
 

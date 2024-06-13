@@ -1,840 +1,118 @@
 {
   "data": [
     {
-      "id": "82af7b34-9d92-4ad3-9277-7a767f318deb",
+      "id": "0f967e94-315d-467d-ad3f-448ee53901f5",
       "name": "My Board 3",
       "description": "This is my board 3",
       "lists": [
         {
-          "id": "c2bea63e-d09c-45a1-b714-50f6f404f660",
+          "id": "cb2a2fb4-f73b-47df-b3a3-52874da5b3c7",
           "name": "List 1",
           "description": "To-do",
           "cards": [
             {
-              "id": "9302228e-cbbc-4fe6-9899-4c34b7855551",
+              "id": "37f3a12c-4fc8-48e8-8125-65098fcfb555",
               "name": "Card 1",
               "description": "hehe",
               "date_start": "today",
               "date_end": "tomorrow",
               "color": "",
               "member": [],
-              "list": "c2bea63e-d09c-45a1-b714-50f6f404f660"
+              "list": "cb2a2fb4-f73b-47df-b3a3-52874da5b3c7"
             },
             {
-              "id": "b360b6ac-c799-4266-a41e-7be6eee052e0",
+              "id": "875ddb9c-10f5-425e-92cb-91447906bf26",
               "name": "Card 1",
               "description": "hehe",
               "date_start": "today",
               "date_end": "tomorrow",
               "color": "",
               "member": [],
-              "list": "c2bea63e-d09c-45a1-b714-50f6f404f660"
-            },
-            {
-              "id": "63762612-56ed-4950-b9af-62a5a30b161c",
-              "name": "Card 1",
-              "description": "hehe",
-              "date_start": "today",
-              "date_end": "tomorrow",
-              "color": "",
-              "member": [],
-              "list": "c2bea63e-d09c-45a1-b714-50f6f404f660"
-            },
-            {
-              "id": "f8d89259-6922-410e-91e7-be35d96c7b48",
-              "name": "Card 1",
-              "description": "hehe",
-              "date_start": "today",
-              "date_end": "tomorrow",
-              "color": "",
-              "member": [],
-              "list": "c2bea63e-d09c-45a1-b714-50f6f404f660"
-            },
-            {
-              "id": "415e3f68-97fa-420c-8481-0666be502613",
-              "name": "Card 1",
-              "description": "hehe",
-              "date_start": "today",
-              "date_end": "tomorrow",
-              "color": "",
-              "member": [],
-              "list": "c2bea63e-d09c-45a1-b714-50f6f404f660"
-            },
-            {
-              "id": "b2d92234-7bbc-4c4c-b981-5aeb9cdb47f0",
-              "name": "Card 1",
-              "description": "hehe",
-              "date_start": "today",
-              "date_end": "tomorrow",
-              "color": "",
-              "member": [],
-              "list": "c2bea63e-d09c-45a1-b714-50f6f404f660"
-            },
-            {
-              "id": "3e53041a-30a4-4c53-9384-dbb57031c91b",
-              "name": "Card 1",
-              "description": "hehe",
-              "date_start": "today",
-              "date_end": "tomorrow",
-              "color": "",
-              "member": [],
-              "list": "c2bea63e-d09c-45a1-b714-50f6f404f660"
-            },
-            {
-              "id": "a86c92ff-03a9-4473-a2c6-83ce08bf4a3e",
-              "name": "Card 1",
-              "description": "hehe",
-              "date_start": "today",
-              "date_end": "tomorrow",
-              "color": "",
-              "member": [],
-              "list": "c2bea63e-d09c-45a1-b714-50f6f404f660"
-            },
-            {
-              "id": "56f83701-7abf-4971-aa52-30847353417e",
-              "name": "Card 1",
-              "description": "hehe",
-              "date_start": "today",
-              "date_end": "tomorrow",
-              "color": "",
-              "member": [],
-              "list": "c2bea63e-d09c-45a1-b714-50f6f404f660"
+              "list": "cb2a2fb4-f73b-47df-b3a3-52874da5b3c7"
             }
           ],
-          "board": "82af7b34-9d92-4ad3-9277-7a767f318deb"
+          "board": "0f967e94-315d-467d-ad3f-448ee53901f5"
         },
         {
-          "id": "aeb7c3fd-8d5f-41e2-b708-99730393e2b4",
+          "id": "764d0cab-07bd-47b7-b966-3c2b7f7b8030",
           "name": "List 1",
           "description": "To-do",
-          "cards": [
-            {
-              "id": "f7ff08b4-7817-4494-b9ba-e5a45f2d0154",
-              "name": "Card 1",
-              "description": "hehe",
-              "date_start": "today",
-              "date_end": "tomorrow",
-              "color": "",
-              "member": [],
-              "list": "aeb7c3fd-8d5f-41e2-b708-99730393e2b4"
-            },
-            {
-              "id": "9f70d2c5-7ad6-4311-87ce-7b039cbc2f96",
-              "name": "Card 1",
-              "description": "hehe",
-              "date_start": "today",
-              "date_end": "tomorrow",
-              "color": "",
-              "member": [],
-              "list": "aeb7c3fd-8d5f-41e2-b708-99730393e2b4"
-            },
-            {
-              "id": "cd57fd35-0494-422f-85f4-ea57e780b4f9",
-              "name": "Card 1",
-              "description": "hehe",
-              "date_start": "today",
-              "date_end": "tomorrow",
-              "color": "",
-              "member": [],
-              "list": "aeb7c3fd-8d5f-41e2-b708-99730393e2b4"
-            },
-            {
-              "id": "62656e84-e54e-447b-9c13-ded1f1d617a4",
-              "name": "Card 1",
-              "description": "hehe",
-              "date_start": "today",
-              "date_end": "tomorrow",
-              "color": "",
-              "member": [],
-              "list": "aeb7c3fd-8d5f-41e2-b708-99730393e2b4"
-            }
-          ],
-          "board": "82af7b34-9d92-4ad3-9277-7a767f318deb"
+          "cards": [],
+          "board": "0f967e94-315d-467d-ad3f-448ee53901f5"
         },
         {
-          "id": "088072b3-9243-4268-8d8e-325dfecda437",
+          "id": "0d95c71b-c517-418e-b37f-a3de55a7ac36",
           "name": "List 1",
           "description": "To-do",
-          "cards": [
-            {
-              "id": "64363007-9192-4628-a51f-600285c01ed0",
-              "name": "Card 1",
-              "description": "hehe",
-              "date_start": "today",
-              "date_end": "tomorrow",
-              "color": "",
-              "member": [],
-              "list": "088072b3-9243-4268-8d8e-325dfecda437"
-            },
-            {
-              "id": "3e1c8d60-43bf-417c-a701-181414398d20",
-              "name": "Card 1",
-              "description": "hehe",
-              "date_start": "today",
-              "date_end": "tomorrow",
-              "color": "",
-              "member": [],
-              "list": "088072b3-9243-4268-8d8e-325dfecda437"
-            },
-            {
-              "id": "ff2c878b-acb4-4bf9-bd19-728c39183f6b",
-              "name": "Card 1",
-              "description": "hehe",
-              "date_start": "today",
-              "date_end": "tomorrow",
-              "color": "",
-              "member": [],
-              "list": "088072b3-9243-4268-8d8e-325dfecda437"
-            },
-            {
-              "id": "1296b487-6ae5-48ae-8ea1-a814bce9c4b3",
-              "name": "Card 1",
-              "description": "hehe",
-              "date_start": "today",
-              "date_end": "tomorrow",
-              "color": "",
-              "member": [],
-              "list": "088072b3-9243-4268-8d8e-325dfecda437"
-            }
-          ],
-          "board": "82af7b34-9d92-4ad3-9277-7a767f318deb"
-        }
-      ],
-      "favorite": false,
-      "owner": {
-        "id": "ADMIN",
-        "name": "Jason",
-        "email": "jason@jason.com",
-        "password": "12345678",
-        "tel": "0987654321",
-        "role": "admin",
-        "image": ""
-      },
-      "member": [
-        {
-          "id": "ADMIN",
-          "name": "Jason",
-          "email": "jason@jason.com",
-          "password": "12345678",
-          "tel": "0987654321",
-          "role": "admin",
-          "image": ""
-        }
-      ],
-      "color": ""
-    },
-    {
-      "id": "b14dc660-b5a5-48af-a959-05f95d76a84d",
-      "name": "My Board 3",
-      "description": "This is my board 3",
-      "lists": [],
-      "favorite": false,
-      "owner": {
-        "id": "ADMIN",
-        "name": "Jason",
-        "username": "God",
-        "password": "12345678",
-        "role": "admin",
-        "image": ""
-      },
-      "member": [
-        {
-          "id": "ADMIN",
-          "name": "Jason",
-          "username": "God",
-          "password": "12345678",
-          "role": "admin",
-          "image": ""
-        }
-      ],
-      "color": ""
-    },
-    {
-      "id": "0025dd99-32cb-4b42-b92e-be8f38d3a27f",
-      "name": "My Board 3",
-      "description": "This is my board 3",
-      "lists": [],
-      "favorite": false,
-      "owner": {
-        "id": "ADMIN",
-        "name": "Jason",
-        "username": "God",
-        "password": "12345678",
-        "role": "admin",
-        "image": ""
-      },
-      "member": [
-        {
-          "id": "ADMIN",
-          "name": "Jason",
-          "username": "God",
-          "password": "12345678",
-          "role": "admin",
-          "image": ""
-        }
-      ],
-      "color": ""
-    },
-    {
-      "id": "431c0dd4-36a1-436d-8561-9881036db098",
-      "name": "My Board 3",
-      "description": "This is my board 3",
-      "lists": [],
-      "favorite": false,
-      "owner": {
-        "id": "ADMIN",
-        "name": "Jason",
-        "username": "God",
-        "password": "12345678",
-        "role": "admin",
-        "image": ""
-      },
-      "member": [
-        {
-          "id": "ADMIN",
-          "name": "Jason",
-          "username": "God",
-          "password": "12345678",
-          "role": "admin",
-          "image": ""
-        }
-      ],
-      "color": ""
-    },
-    {
-      "id": "ea4bd01d-affa-41f2-a786-cfa55031fbf0",
-      "name": "My Board 3",
-      "description": "This is my board 3",
-      "lists": [],
-      "favorite": false,
-      "owner": {
-        "id": "ADMIN",
-        "name": "Jason",
-        "username": "God",
-        "password": "12345678",
-        "role": "admin",
-        "image": ""
-      },
-      "member": [
-        {
-          "id": "ADMIN",
-          "name": "Jason",
-          "username": "God",
-          "password": "12345678",
-          "role": "admin",
-          "image": ""
-        }
-      ],
-      "color": ""
-    },
-    {
-      "id": "93352a1e-a9ad-4259-ba15-81541a0f11f3",
-      "name": "My Board 3",
-      "description": "This is my board 3",
-      "lists": [],
-      "favorite": false,
-      "owner": {
-        "id": "ADMIN",
-        "name": "Jason",
-        "username": "God",
-        "password": "12345678",
-        "role": "admin",
-        "image": ""
-      },
-      "member": [
-        {
-          "id": "ADMIN",
-          "name": "Jason",
-          "username": "God",
-          "password": "12345678",
-          "role": "admin",
-          "image": ""
-        }
-      ],
-      "color": ""
-    },
-    {
-      "id": "e15cbeda-397d-4250-b8b7-52bd98f5a0b2",
-      "name": "My Board 3",
-      "description": "This is my board 3",
-      "lists": [],
-      "favorite": false,
-      "owner": {
-        "id": "ADMIN",
-        "name": "Jason",
-        "username": "God",
-        "password": "12345678",
-        "role": "admin",
-        "image": ""
-      },
-      "member": [
-        {
-          "id": "ADMIN",
-          "name": "Jason",
-          "username": "God",
-          "password": "12345678",
-          "role": "admin",
-          "image": ""
-        }
-      ],
-      "color": ""
-    },
-    {
-      "id": "0b41d16d-f50f-496e-ae01-da7eceb3ac70",
-      "name": "My Board 3",
-      "description": "This is my board 3",
-      "lists": [],
-      "favorite": false,
-      "owner": {
-        "id": "ADMIN",
-        "name": "Jason",
-        "username": "God",
-        "password": "12345678",
-        "role": "admin",
-        "image": ""
-      },
-      "member": [
-        {
-          "id": "ADMIN",
-          "name": "Jason",
-          "username": "God",
-          "password": "12345678",
-          "role": "admin",
-          "image": ""
-        }
-      ],
-      "color": ""
-    },
-    {
-      "id": "3dd7ec4d-25d9-42fa-9341-33735fc2adda",
-      "name": "My Board 3",
-      "description": "This is my board 3",
-      "lists": [],
-      "favorite": false,
-      "owner": {
-        "id": "ADMIN",
-        "name": "Jason",
-        "username": "God",
-        "password": "12345678",
-        "role": "admin",
-        "image": ""
-      },
-      "member": [
-        {
-          "id": "ADMIN",
-          "name": "Jason",
-          "username": "God",
-          "password": "12345678",
-          "role": "admin",
-          "image": ""
-        }
-      ],
-      "color": ""
-    },
-    {
-      "id": "2aa7f475-c060-4ede-afdc-7cc1b6365a27",
-      "name": "My Board 3",
-      "description": "This is my board 3",
-      "lists": [],
-      "favorite": false,
-      "owner": {
-        "id": "ADMIN",
-        "name": "Jason",
-        "username": "God",
-        "password": "12345678",
-        "role": "admin",
-        "image": ""
-      },
-      "member": [
-        {
-          "id": "ADMIN",
-          "name": "Jason",
-          "username": "God",
-          "password": "12345678",
-          "role": "admin",
-          "image": ""
-        }
-      ],
-      "color": ""
-    },
-    {
-      "id": "ceb9de8f-49e4-44df-b55f-b5bd55df5f21",
-      "name": "My Board 3",
-      "description": "This is my board 3",
-      "lists": [],
-      "favorite": false,
-      "owner": {
-        "id": "ADMIN",
-        "name": "Jason",
-        "username": "God",
-        "password": "12345678",
-        "role": "admin",
-        "image": ""
-      },
-      "member": [
-        {
-          "id": "ADMIN",
-          "name": "Jason",
-          "username": "God",
-          "password": "12345678",
-          "role": "admin",
-          "image": ""
-        }
-      ],
-      "color": ""
-    },
-    {
-      "id": "34360756-462f-45bf-8a77-e9f618914bcc",
-      "name": "My Board 3",
-      "description": "This is my board 3",
-      "lists": [],
-      "favorite": false,
-      "owner": {
-        "id": "ADMIN",
-        "name": "Jason",
-        "username": "God",
-        "password": "12345678",
-        "role": "admin",
-        "image": ""
-      },
-      "member": [
-        {
-          "id": "ADMIN",
-          "name": "Jason",
-          "username": "God",
-          "password": "12345678",
-          "role": "admin",
-          "image": ""
-        }
-      ],
-      "color": ""
-    },
-    {
-      "id": "fdc5f2d8-c331-48a1-af30-00f990af0963",
-      "name": "My Board 3",
-      "description": "This is my board 3",
-      "lists": [],
-      "favorite": false,
-      "owner": {
-        "id": "ADMIN",
-        "name": "Jason",
-        "username": "God",
-        "password": "12345678",
-        "role": "admin",
-        "image": ""
-      },
-      "member": [
-        {
-          "id": "ADMIN",
-          "name": "Jason",
-          "username": "God",
-          "password": "12345678",
-          "role": "admin",
-          "image": ""
-        }
-      ],
-      "color": ""
-    },
-    {
-      "id": "693d8c36-028d-4abc-8614-7537ba71d4dd",
-      "name": "My Board 3",
-      "description": "This is my board 3",
-      "lists": [],
-      "favorite": false,
-      "owner": {
-        "id": "ADMIN",
-        "name": "Jason",
-        "username": "God",
-        "password": "12345678",
-        "role": "admin",
-        "image": ""
-      },
-      "member": [
-        {
-          "id": "ADMIN",
-          "name": "Jason",
-          "username": "God",
-          "password": "12345678",
-          "role": "admin",
-          "image": ""
-        }
-      ],
-      "color": ""
-    },
-    {
-      "id": "28f00cab-9c86-42f9-8976-7e9291abfdfc",
-      "name": "My Board 3",
-      "description": "This is my board 3",
-      "lists": [],
-      "favorite": false,
-      "owner": {
-        "id": "ADMIN",
-        "name": "Jason",
-        "username": "God",
-        "password": "12345678",
-        "role": "admin",
-        "image": ""
-      },
-      "member": [
-        {
-          "id": "ADMIN",
-          "name": "Jason",
-          "username": "God",
-          "password": "12345678",
-          "role": "admin",
-          "image": ""
-        }
-      ],
-      "color": ""
-    },
-    {
-      "id": "d17d23cf-6ff0-48cf-8cc6-5d2fa3943bcb",
-      "name": "My Board 3",
-      "description": "This is my board 3",
-      "lists": [],
-      "favorite": false,
-      "owner": {
-        "id": "ADMIN",
-        "name": "Jason",
-        "username": "God",
-        "password": "12345678",
-        "role": "admin",
-        "image": ""
-      },
-      "member": [
-        {
-          "id": "ADMIN",
-          "name": "Jason",
-          "username": "God",
-          "password": "12345678",
-          "role": "admin",
-          "image": ""
-        }
-      ],
-      "color": ""
-    },
-    {
-      "id": "51b6f82d-76a8-484a-9758-f0c8b3cfd1a9",
-      "name": "My Board 3",
-      "description": "This is my board 3",
-      "lists": [],
-      "favorite": false,
-      "owner": {
-        "id": "ADMIN",
-        "name": "Jason",
-        "username": "God",
-        "password": "12345678",
-        "role": "admin",
-        "image": ""
-      },
-      "member": [
-        {
-          "id": "ADMIN",
-          "name": "Jason",
-          "username": "God",
-          "password": "12345678",
-          "role": "admin",
-          "image": ""
-        }
-      ],
-      "color": ""
-    },
-    {
-      "id": "86a58642-805c-4c8f-b75a-8b98f2829fe6",
-      "name": "My Board 3",
-      "description": "This is my board 3",
-      "lists": [],
-      "favorite": false,
-      "owner": {
-        "id": "ADMIN",
-        "name": "Jason",
-        "username": "God",
-        "password": "12345678",
-        "role": "admin",
-        "image": ""
-      },
-      "member": [
-        {
-          "id": "ADMIN",
-          "name": "Jason",
-          "username": "God",
-          "password": "12345678",
-          "role": "admin",
-          "image": ""
-        }
-      ],
-      "color": ""
-    },
-    {
-      "id": "82110464-c9c4-4acc-96a5-7df5d8300264",
-      "name": "My Board 3",
-      "description": "This is my board 3",
-      "lists": [
-        {
-          "id": "c2ff6343-e930-4f45-b3ef-80376fb69f95",
-          "name": "List 1",
-          "description": "To-do",
-          "cards": [
-            {
-              "id": "2381084d-42d1-4450-98b3-7f8f331b329c",
-              "name": "Card 1",
-              "description": "hehe",
-              "date_start": "today",
-              "date_end": "tomorrow",
-              "color": "",
-              "member": [],
-              "list": "c2ff6343-e930-4f45-b3ef-80376fb69f95"
-            },
-            {
-              "id": "9dcb1bd8-1a41-4243-b408-50f92d9976a3",
-              "name": "Card 1",
-              "description": "hehe",
-              "date_start": "today",
-              "date_end": "tomorrow",
-              "color": "",
-              "member": [],
-              "list": "c2ff6343-e930-4f45-b3ef-80376fb69f95"
-            }
-          ],
-          "board": "82110464-c9c4-4acc-96a5-7df5d8300264"
+          "cards": [],
+          "board": "0f967e94-315d-467d-ad3f-448ee53901f5"
         },
         {
-          "id": "6d2b55bb-60ad-4f6f-bcb9-e512e94c0453",
+          "id": "df300bc5-625e-4b55-9d22-f58239b447be",
           "name": "List 1",
           "description": "To-do",
-          "cards": [
-            {
-              "id": "f768a183-ccf2-4a0f-baf9-cbf35a0018b3",
-              "name": "Card 1",
-              "description": "hehe",
-              "date_start": "today",
-              "date_end": "tomorrow",
-              "color": "",
-              "member": [],
-              "list": "6d2b55bb-60ad-4f6f-bcb9-e512e94c0453"
-            },
-            {
-              "id": "497cbf6f-13f8-4d3f-949c-a9e24b153521",
-              "name": "Card 1",
-              "description": "hehe",
-              "date_start": "today",
-              "date_end": "tomorrow",
-              "color": "",
-              "member": [],
-              "list": "6d2b55bb-60ad-4f6f-bcb9-e512e94c0453"
-            },
-            {
-              "id": "70e2e06d-4835-4033-9502-d6b35a9d0167",
-              "name": "Card 1",
-              "description": "hehe",
-              "date_start": "today",
-              "date_end": "tomorrow",
-              "color": "",
-              "member": [],
-              "list": "6d2b55bb-60ad-4f6f-bcb9-e512e94c0453"
-            }
-          ],
-          "board": "82110464-c9c4-4acc-96a5-7df5d8300264"
+          "cards": [],
+          "board": "0f967e94-315d-467d-ad3f-448ee53901f5"
         },
         {
-          "id": "d70fc188-36dd-43a4-8f13-d9806705c5ad",
+          "id": "9803d92f-42d7-42d5-aaec-0c61613b51ee",
           "name": "List 1",
           "description": "To-do",
-          "cards": [
-            {
-              "id": "5e4a9123-a3d5-4a2b-8b78-e93ac5e9d552",
-              "name": "Card 1",
-              "description": "hehe",
-              "date_start": "today",
-              "date_end": "tomorrow",
-              "color": "",
-              "member": [],
-              "list": "d70fc188-36dd-43a4-8f13-d9806705c5ad"
-            },
-            {
-              "id": "85a034ab-0fa9-4ce5-a317-0c27b4e1bf9c",
-              "name": "Card 1",
-              "description": "hehe",
-              "date_start": "today",
-              "date_end": "tomorrow",
-              "color": "",
-              "member": [],
-              "list": "d70fc188-36dd-43a4-8f13-d9806705c5ad"
-            }
-          ],
-          "board": "82110464-c9c4-4acc-96a5-7df5d8300264"
+          "cards": [],
+          "board": "0f967e94-315d-467d-ad3f-448ee53901f5"
+        },
+        {
+          "id": "64c3abaf-ff65-4bfa-82b9-45f3d0dff877",
+          "name": "List 1",
+          "description": "To-do",
+          "cards": [],
+          "board": "0f967e94-315d-467d-ad3f-448ee53901f5"
+        },
+        {
+          "id": "2ac69b5e-728e-4464-a388-ee9623eda363",
+          "name": "List 1",
+          "description": "To-do",
+          "cards": [],
+          "board": "0f967e94-315d-467d-ad3f-448ee53901f5"
+        },
+        {
+          "id": "1f616174-15fc-4f6b-b365-4f4d9f2e6b5e",
+          "name": "List 1",
+          "description": "To-do",
+          "cards": [],
+          "board": "0f967e94-315d-467d-ad3f-448ee53901f5"
+        },
+        {
+          "id": "81d53c98-f1e1-4438-94bf-da4e064569bc",
+          "name": "List 1",
+          "description": "To-do",
+          "cards": [],
+          "board": "0f967e94-315d-467d-ad3f-448ee53901f5"
+        },
+        {
+          "id": "98e25851-17c5-4dce-981e-34d71a0ef5f2",
+          "name": "List 1",
+          "description": "To-do",
+          "cards": [],
+          "board": "0f967e94-315d-467d-ad3f-448ee53901f5"
         }
       ],
       "favorite": true,
-      "owner": {
-        "id": "ADMIN",
-        "name": "Jason",
-        "username": "God",
-        "password": "12345678",
-        "role": "admin",
-        "image": ""
-      },
+      "owner": "3a99518f-08ef-45e7-bb4d-6e9d3ce9f4a0",
       "member": [
-        {
-          "id": "ADMIN",
-          "name": "Jason",
-          "username": "God",
-          "password": "12345678",
-          "role": "admin",
-          "image": ""
-        }
+        "3a99518f-08ef-45e7-bb4d-6e9d3ce9f4a0"
       ],
       "color": ""
     },
     {
-      "id": "09e2914b-4e18-4d6a-83cc-829c17a92a96",
+      "id": "36ebd53c-9ef7-4af9-91d6-31ad365ba427",
       "name": "My Board 3",
       "description": "This is my board 3",
       "lists": [],
       "favorite": true,
-      "owner": {
-        "id": "ADMIN",
-        "name": "Jason",
-        "username": "God",
-        "password": "12345678",
-        "role": "admin",
-        "image": ""
-      },
+      "owner": "3a99518f-08ef-45e7-bb4d-6e9d3ce9f4a0",
       "member": [
-        {
-          "id": "ADMIN",
-          "name": "Jason",
-          "username": "God",
-          "password": "12345678",
-          "role": "admin",
-          "image": ""
-        }
-      ],
-      "color": ""
-    },
-    {
-      "id": "ea0cbb1c-3222-4cc5-82b4-78fa435c7873",
-      "name": "My Board 3",
-      "description": "This is my board 3",
-      "lists": [],
-      "favorite": false,
-      "owner": {
-        "id": "ADMIN",
-        "name": "Jason",
-        "username": "God",
-        "password": "12345678",
-        "role": "admin",
-        "image": ""
-      },
-      "member": [
-        {
-          "id": "ADMIN",
-          "name": "Jason",
-          "username": "God",
-          "password": "12345678",
-          "role": "admin",
-          "image": ""
-        }
+        "3a99518f-08ef-45e7-bb4d-6e9d3ce9f4a0"
       ],
       "color": ""
     }

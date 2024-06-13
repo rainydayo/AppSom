@@ -26,7 +26,7 @@ export default function BoardIdPage ({params} : {params: {bid : string}}) {
         }, 1000);
         LoadList();
         
-    }, [lists]);
+    }, [lists, board]);
 
     if (!board) {
         return null;
@@ -62,7 +62,7 @@ export default function BoardIdPage ({params} : {params: {bid : string}}) {
     }
     
     return (
-        <main className="flex flex-col bg-orange-50 h-full ml-64">
+        <main className="flex flex-col bg-somon h-full ml-64">
             <BoardNav board={board}/>
             <div className="flex flex-row justify-start items-start gap-10 p-10">
                 {
@@ -76,7 +76,7 @@ export default function BoardIdPage ({params} : {params: {bid : string}}) {
                         </div>
                     )
                 }
-                <button className="p-5 bg-orange-50 font-bold shadow-inner drop-shadow-xl rounded w-[200px]" onClick={() => {CreateList(makeList(params.bid), params.bid);}}>
+                <button className="p-5 bg-somon font-bold shadow-inner drop-shadow-xl rounded w-[200px]" onClick={() => {CreateList(makeList(params.bid), params.bid);}}>
                     + Add a List
                 </button>
             </div>

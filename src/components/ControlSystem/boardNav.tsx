@@ -1,12 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Board } from "../../../interface";
 import Image from "next/image";
+import UpdateBoardById from "@/lib/UpdateBoardById";
 
 export default function BoardNav ({board} : {board: Board}) {
-    const [isStarActive, setIsStarActive] = useState(false);
+    const [isStarActive, setIsStarActive] = useState<boolean>(board.favorite);
 
-    const handleStarClick = () => {
-        setIsStarActive(!isStarActive);
+    const handleStarClick = async () => {
+        setIsStarActive(!board.favorite);
+        const favorite: Board = {
+            id: board.id,
+            name: board.name,
+            description: board.description,
+            lists: board.lists,
+            favorite: !board.favorite,
+            owner: board.owner,
+            member: board.member,
+            color: board.color
+        }
+        await UpdateBoardById(board.id, favorite);
     };
 
     return (
