@@ -1,6 +1,112 @@
 {
   "data": [
     {
+      "id": "list1",
+      "name": "To Do",
+      "description": "Tasks to be done",
+      "cards": [
+        {
+          "id": "card1",
+          "name": "Task 1",
+          "description": "This is the first task.",
+          "date_start": "2024-06-10",
+          "date_end": "2024-06-13",
+          "color": "#FF5733",
+          "member": [
+            "75c8ba78-d371-4ff6-be29-1139cfebf33c"
+          ],
+          "list": "list1"
+        },
+        {
+          "id": "card2",
+          "name": "Task 2",
+          "description": "This is the second task.",
+          "date_start": "2024-06-12",
+          "date_end": "2024-06-15",
+          "color": "#33FF57",
+          "member": [
+            "75c8ba78-d371-4ff6-be29-1139cfebf33c",
+            "2"
+          ],
+          "list": "list1"
+        }
+      ],
+      "board": "board1"
+    },
+    {
+      "id": "list2",
+      "name": "In Progress",
+      "description": "Tasks in progress",
+      "cards": [
+        {
+          "id": "card3",
+          "name": "Task 3",
+          "description": "This is the third task.",
+          "date_start": "2024-06-14",
+          "date_end": "2024-06-18",
+          "color": "#3357FF",
+          "member": [
+            "75c8ba78-d371-4ff6-be29-1139cfebf33c"
+          ],
+          "list": "list2"
+        }
+      ],
+      "board": "board1"
+    },
+    {
+      "id": "list3",
+      "name": "Backlog",
+      "description": "Backlog tasks",
+      "cards": [
+        {
+          "id": "card4",
+          "name": "Task 4",
+          "description": "This is the fourth task.",
+          "date_start": "2024-06-11",
+          "date_end": "2024-06-14",
+          "color": "#FF5733",
+          "member": [
+            "75c8ba78-d371-4ff6-be29-1139cfebf33c"
+          ],
+          "list": "list3"
+        },
+        {
+          "id": "card5",
+          "name": "Task 5",
+          "description": "This is the fifth task.",
+          "date_start": "2024-06-13",
+          "date_end": "2024-06-16",
+          "color": "#33FF57",
+          "member": [
+            "75c8ba78-d371-4ff6-be29-1139cfebf33c",
+            "2"
+          ],
+          "list": "list3"
+        }
+      ],
+      "board": "board2"
+    },
+    {
+      "id": "list4",
+      "name": "In Review",
+      "description": "Tasks under review",
+      "cards": [
+        {
+          "id": "card6",
+          "name": "Task 6",
+          "description": "This is the sixth task.",
+          "date_start": "2024-06-15",
+          "date_end": "2024-06-18",
+          "color": "#3357FF",
+          "member": [
+            "75c8ba78-d371-4ff6-be29-1139cfebf33c"
+          ],
+          "list": "list4"
+        }
+      ],
+      "board": "board2"
+    },
+    {
       "id": "8dc49292-5a1d-45d0-bd78-4860a20e7739",
       "name": "List 1",
       "description": "To-do",
