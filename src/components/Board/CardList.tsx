@@ -1,4 +1,3 @@
-// components/Board/CardList.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -8,21 +7,11 @@ import GetListById from "@/lib/GetListById";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
 export default function CardList({ list }: { list: List }) {
-    const [cards, setCards] = useState<Card[]>([]);
+    const [cards, setCards] = useState<Card[]>(list.cards);
 
     useEffect(() => {
-        const LoadCard = async () => {
-            const data = await GetListById(list.board, list.id);
-            const cardsData = data?.cards;
-            if (!cardsData) {
-                console.error("Failed to load cards for list:", list.id);
-                return null;
-            }
-            console.log("Loaded cards for list:", list.id, cardsData);
-            setCards(cardsData);
-        };
-        LoadCard();
-    }, [list.id]);
+        setCards(list.cards);
+    }, [list.cards]);
 
     const uuid = crypto.randomUUID();
 
