@@ -41,33 +41,6 @@ export default function BoardList({ starred }: { starred: boolean }) {
         board.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    const createTemplateList = async (bid: string) => {
-        const to_do: List = {
-            id: crypto.randomUUID(),
-            name: "To-Do",
-            description: "To-Do List",
-            cards: [],
-            board: bid
-        }
-        const doing: List = {
-            id: crypto.randomUUID(),
-            name: "Doing",
-            description: "Doing List",
-            cards: [],
-            board: bid
-        }
-        const done: List = {
-            id: crypto.randomUUID(),
-            name: "Done",
-            description: "Done List",
-            cards: [],
-            board: bid
-        }
-        await CreateList(to_do, bid);
-        await CreateList(doing, bid);
-        await CreateList(done, bid);
-    }
-
     const handleCreateBoard = async (name: string, description: string) => {
         const newBoard: Board = {
             id: crypto.randomUUID(),
@@ -80,7 +53,6 @@ export default function BoardList({ starred }: { starred: boolean }) {
             color: ""
         };
         await CreateBoard(newBoard);
-        await createTemplateList(newBoard.id);
     };
 
     return (

@@ -10,7 +10,7 @@ export default function CardList ({list} : {list: List}) {
     const [cards, setCards] = useState<Card[]>([]);
     useEffect(() => {
         const LoadCard = async () => {
-            const data = await GetListById(list.id);
+            const data = await GetListById(list.board, list.id);
             const cardsData = data?.cards;
             if (!cardsData) {
                 return null;

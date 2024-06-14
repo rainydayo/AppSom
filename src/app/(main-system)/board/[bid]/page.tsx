@@ -29,7 +29,7 @@ const BoardIdPage: React.FC<BoardIdPageProps> = ({ params }) => {
             }
         };
         loadList();
-    }, [params.bid]);
+    }, [params.bid, lists]);
 
     if (!board) {
         return null;

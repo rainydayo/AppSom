@@ -1,11 +1,35 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
-import { BoardJSON } from '../../../../interface';
+import { Board, BoardJSON, List } from '../../../../interface';
 
 export async function POST(req: Request) {
     try {
-        const board = await req.json();
+        var board: Board = await req.json();
+
+        const to_do: List = {
+            id: crypto.randomUUID(),
+            name: "To-Do",
+            description: "To-Do List",
+            cards: [],
+            board: board.id
+        }
+        const doing: List = {
+            id: crypto.randomUUID(),
+            name: "In Progress",
+            description: "Doing List",
+            cards: [],
+            board: board.id
+        }
+        const done: List = {
+            id: crypto.randomUUID(),
+            name: "Done",
+            description: "Done List",
+            cards: [],
+            board: board.id
+        }
+
+        board.lists.push(to_do, doing, done);
 
         const filePath = path.resolve('./public/Storage/Board/board.json');
 

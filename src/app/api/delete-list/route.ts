@@ -7,12 +7,7 @@ export async function DELETE(req: Request) {
     try {
         const id = await req.json();
         // obj = JSON.parse(obj);
-        const listPath = path.resolve('./public/Storage/List/list.json');
         const boardPath = path.resolve('./public/Storage/Board/board.json');
-
-        const listFileData = fs.readFileSync(listPath, 'utf-8');
-        const listJson: ListJSON = JSON.parse(listFileData);
-
         const boardFileData = fs.readFileSync(boardPath, 'utf-8');
         const boardJson: BoardJSON = JSON.parse(boardFileData);
 
@@ -24,14 +19,8 @@ export async function DELETE(req: Request) {
         if (idx_lb == -1) { // to return index of list in the board
             return NextResponse.json({ message: 'Cannot find list in the board' }, {status: 404});
         }
-        const idx_l = listJson.data.findIndex(l => l.id === id.lid); 
-        if (idx_l == -1) { // to return index of list in list.json
-            return NextResponse.json({ message: 'Cannot find list in all lists' }, {status: 404});
-        }
         boardJson.data[idx_b].lists.splice(idx_lb, 1);
-        listJson.data.splice(idx_l, 1);
 
-        fs.writeFileSync(listPath, JSON.stringify(listJson, null, 2));
         fs.writeFileSync(boardPath, JSON.stringify(boardJson, null, 2));
         
 
