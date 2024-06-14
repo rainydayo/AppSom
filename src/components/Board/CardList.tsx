@@ -1,28 +1,31 @@
-"use client"
+// components/Board/CardList.tsx
+"use client";
 
 import { useEffect, useState } from "react";
 import { Card, List } from "../../../interface";
 import CreateCard from "@/lib/CreateCard";
 import GetListById from "@/lib/GetListById";
+import { Droppable, Draggable } from "react-beautiful-dnd";
 
-export default function CardList ({list} : {list: List}) {
-
+export default function CardList({ list }: { list: List }) {
     const [cards, setCards] = useState<Card[]>([]);
+
     useEffect(() => {
         const LoadCard = async () => {
             const data = await GetListById(list.board, list.id);
             const cardsData = data?.cards;
             if (!cardsData) {
+                console.error("Failed to load cards for list:", list.id);
                 return null;
             }
+            console.log("Loaded cards for list:", list.id, cardsData);
             setCards(cardsData);
-        }
-        setTimeout(() => {
-
-        }, 1000);
+        };
         LoadCard();
-    }, [cards]);
+    }, [list.id]);
+
     const uuid = crypto.randomUUID();
+
     const makeCard = () => {
         const card: Card = {
             id: uuid,
@@ -32,22 +35,40 @@ export default function CardList ({list} : {list: List}) {
             date_end: "tomorrow",
             color: "",
             member: [],
-            list: list.id
-        }
+            list: list.id,
+        };
+        console.log("Creating new card:", card);
         return card;
-    }
+    };
+
     return (
-        <div className="flex flex-col items-start gap-2">
-            {
-                cards.map((c) => 
-                    <div key={c.id} className="bg-white shadow-lg w-full px-3 py-2 rounded">
-                        <h1 className="font-semibold text-md">{c.name}</h1>
-                    </div>
-                )
-            }
-            <button onClick={() => {CreateCard(makeCard(), list.id, list.board)}}>
-                <h1 className="font-semibold text-lg">+ Add a Card</h1>
-            </button>
-        </div>
+        <Droppable droppableId={list.id} type="card">
+            {(provided) => (
+                <div
+                    className="flex flex-col items-start gap-2"
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                >
+                    {cards.map((c, index) => (
+                        <Draggable key={c.id} draggableId={c.id} index={index}>
+                            {(provided) => (
+                                <div
+                                    className="bg-white shadow-lg w-full px-3 py-2 rounded"
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                    ref={provided.innerRef}
+                                >
+                                    <h1 className="font-semibold text-md">{c.name}</h1>
+                                </div>
+                            )}
+                        </Draggable>
+                    ))}
+                    {provided.placeholder}
+                    <button onClick={() => { CreateCard(makeCard(), list.id, list.board) }}>
+                        <h1 className="font-semibold text-lg">+ Add a Card</h1>
+                    </button>
+                </div>
+            )}
+        </Droppable>
     );
 }

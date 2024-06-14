@@ -9,19 +9,14 @@
           "id": "list1",
           "name": "To Do",
           "description": "Tasks to be done",
+          "cards": [],
+          "board": "board1"
+        },
+        {
+          "id": "list2",
+          "name": "In Progress",
+          "description": "Tasks in progress",
           "cards": [
-            {
-              "id": "card1",
-              "name": "Task 1",
-              "description": "This is the first task.",
-              "date_start": "2024-06-10",
-              "date_end": "2024-06-13",
-              "color": "#FF5733",
-              "member": [
-                "75c8ba78-d371-4ff6-be29-1139cfebf33c"
-              ],
-              "list": "list1"
-            },
             {
               "id": "card2",
               "name": "Task 2",
@@ -34,15 +29,19 @@
                 "2"
               ],
               "list": "list1"
-            }
-          ],
-          "board": "board1"
-        },
-        {
-          "id": "list2",
-          "name": "In Progress",
-          "description": "Tasks in progress",
-          "cards": [
+            },
+            {
+              "id": "card1",
+              "name": "Task 1",
+              "description": "This is the first task.",
+              "date_start": "2024-06-10",
+              "date_end": "2024-06-13",
+              "color": "#FF5733",
+              "member": [
+                "75c8ba78-d371-4ff6-be29-1139cfebf33c"
+              ],
+              "list": "list1"
+            },
             {
               "id": "card3",
               "name": "Task 3",
