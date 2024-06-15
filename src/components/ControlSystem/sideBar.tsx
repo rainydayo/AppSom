@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTheme } from './themeSet';
 import Image from 'next/image';
 import convertImgUrl from './convertImgUrl';
@@ -6,13 +6,32 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThLarge, faCalendarAlt, faStar, faEllipsisV, faCog } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
+import { Board, BoardJSON } from '../../../interface';
+import GetBoards from '@/lib/GetBoards';
+import AddBoardPopup from '../Board/AddBoardPopup';
+import CreateBoard from '@/lib/CreateBoard';
 
 export default function Sidebar() {
   const { changeTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [boards, setBoards] = useState<Board[]>([]);
+  const [showPopup, setShowPopup] = useState(false);
   const { data: session } = useSession();
 
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+
+  if (!session) {
+    return null;
+  }
+
+  useEffect(() => {
+    const LoadBoards = async () => {
+        const data: BoardJSON = await GetBoards();
+        const filteredBoards = data.data.filter(b => (b.owner === session.user.id || b.member.includes(session.user.id)));
+        setBoards(filteredBoards);
+    };
+    LoadBoards();
+  }, [boards]);
 
   const toggleProfileMenu = () => {
     setIsProfileMenuOpen(!isProfileMenuOpen);
@@ -29,6 +48,20 @@ export default function Sidebar() {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const handleCreateBoard = async (name: string, description: string) => {
+    const newBoard: Board = {
+        id: crypto.randomUUID(),
+        name,
+        description,
+        lists: [],
+        favorite: false,
+        owner: session.user.id,
+        member: [session.user.id],
+        color: ""
+    };
+    await CreateBoard(newBoard);
+};
 
   const profilePicUrl = 'https://drive.google.com/file/d/17ad4RrjEqQmKiwgwA0PmRLoadt1AiigI/view?usp=drive_link';
   const logoUrl = "https://drive.google.com/file/d/1xNsGNsI9bwcRYSnb5hKCAiHwK0wrkuYD/view?usp=drive_link";
@@ -83,19 +116,38 @@ export default function Sidebar() {
         </div>
         <ul>
           <li className="mb-2 flex items-center">
-            <FontAwesomeIcon icon={faThLarge} className="text-white mr-2" />
+            <FontAwesomeIcon icon={faThLarge} className="text-white mr-2 ml-1.5" />
             <a href="/board" className="text-white">Board</a>
           </li>
           <li className="mb-2 flex items-center">
-            <FontAwesomeIcon icon={faCalendarAlt} className="text-white mr-2" />
+            <FontAwesomeIcon icon={faCalendarAlt} className="text-white mr-2 ml-1.5" />
             <a href="/calendar" className="text-white">Calendar</a>
           </li>
           <li className="mb-2 flex items-center">
-            <FontAwesomeIcon icon={faStar} className="text-white mr-2" />
+            <FontAwesomeIcon icon={faStar} className="text-white mr-2 ml-1.5" />
             <a href="/starred" className="text-white">Starred</a>
           </li>
+          <li className="mb-2 mt-5 flex items-center justify-between">
+            <a className="text-white font-bold text-xl">Your Board</a>
+            <button
+            onClick={() => setShowPopup(true)}
+            className="text-white font-bold text-xl bg-transparent border-none cursor-pointer focus:outline-none"
+          >
+            +
+          </button>
+          </li>
+          {
+            boards.length > 0 ?
+              boards.map((b)=>
+                <li className="mb-2 flex items-center">
+                  <FontAwesomeIcon icon={faThLarge} className="text-white mr-2 ml-1.5" />
+                  <a href={`/board/${b.id}`} className="text-white">{b.name}</a>
+                </li>
+              ) : ""
+          }
         </ul>
       </div>
+
       <div>
         <hr className="border-white mb-4" />
         <button
@@ -126,6 +178,12 @@ export default function Sidebar() {
           </div>
         )}
       </div>
+      {showPopup && (
+                <AddBoardPopup 
+                    onClose={() => setShowPopup(false)}
+                    onSave={handleCreateBoard}
+                />
+            )}
     </div>
   );
 }
