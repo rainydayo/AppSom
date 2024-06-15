@@ -136,15 +136,18 @@ export default function Sidebar() {
             +
           </button>
           </li>
-          {
-            boards.length > 0 ?
-              boards.map((b)=>
-                <li className="mb-2 flex items-center">
-                  <FontAwesomeIcon icon={faThLarge} className="text-white mr-2 ml-1.5" />
-                  <a href={`/board/${b.id}`} className="text-white">{b.name}</a>
-                </li>
-              ) : ""
-          }
+          <div className="max-h-32 overflow-y-auto">
+            {
+              boards.length > 0 ?
+                boards.map((b) =>
+                  <li key={b.id} className="mb-2 flex items-center">
+                      <FontAwesomeIcon icon={faThLarge} className="text-white mr-2 ml-1.5" />
+                      <a href={`/board/${b.id}`} className="text-white">{b.name}</a>
+                  </li>
+                ) : ""
+            }
+          </div>
+
         </ul>
       </div>
 
@@ -158,7 +161,7 @@ export default function Sidebar() {
           Theme Setting
         </button>
         {isMenuOpen && (
-          <div className="bg-white text-som p-4 rounded shadow-lg">
+          <div className="bg-white text-som p-2 rounded shadow-lg">
             <label htmlFor="colorPicker" className="block text-center text-som mb-2">
               Pick a color
             </label>
@@ -171,7 +174,7 @@ export default function Sidebar() {
             />
             <button
               onClick={handleDefaultColor}
-              className="px-4 py-2 bg-som text-white rounded w-full text-center"
+              className="px-4 py-1 bg-som text-white rounded w-full text-center"
             >
               Default Color
             </button>
