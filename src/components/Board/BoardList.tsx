@@ -44,7 +44,7 @@ export default function BoardList({ starred }: { starred: boolean }) {
         board.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    const handleCreateBoard = async (name: string, description: string) => {
+    const handleCreateBoard = async (name: string, description: string, color: string) => {
         const newBoard: Board = {
             id: crypto.randomUUID(),
             name,
@@ -53,9 +53,10 @@ export default function BoardList({ starred }: { starred: boolean }) {
             favorite: starred,
             owner: session.user.id,
             member: [session.user.id],
-            color: ""
+            color
         };
         await CreateBoard(newBoard);
+        setBoards([...boards, newBoard]);
     };
 
     return (
@@ -93,7 +94,7 @@ export default function BoardList({ starred }: { starred: boolean }) {
                 </div>
                 {filteredBoards.length > 0 ?
                     filteredBoards.map((b) =>
-                        <div key={b.id} className="bg-orange-500 rounded w-[300px] h-[150px] relative">
+                        <div key={b.id} className={`rounded w-[300px] h-[150px] relative`} style={{ backgroundColor: b.color }}>
                             {b.favorite && (
                                 <FontAwesomeIcon
                                     icon={faStar}
