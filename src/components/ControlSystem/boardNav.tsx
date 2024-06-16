@@ -2,27 +2,38 @@ import { useEffect, useState } from "react";
 import { Board } from "../../../interface";
 import Image from "next/image";
 import UpdateBoardById from "@/lib/UpdateBoardById";
+import DeleteBoardById from "@/lib/DeleteBoardByID";
 import { useSession } from "next-auth/react";
+import EditBoardPopup from "../Board/EditBoardPopup";
+import DeleteBoardPopup from "../Board/DeleteBoardPopup";
 
 export default function BoardNav ({board} : {board: Board}) {
     const [isStarActive, setIsStarActive] = useState<boolean>(board.favorite);
+    const [showEditPopup, setShowEditPopup] = useState<boolean>(false);
+    const [showDeletePopup, setShowDeletePopup] = useState<boolean>(false);
     const { data: session } = useSession();
+
     if (!session) {
         return null;
     }
+
     const handleStarClick = async () => {
         setIsStarActive(!board.favorite);
         const favorite: Board = {
-            id: board.id,
-            name: board.name,
-            description: board.description,
-            lists: board.lists,
+            ...board,
             favorite: !board.favorite,
-            owner: board.owner,
-            member: board.member,
-            color: board.color
-        }
+        };
         await UpdateBoardById(board.id, favorite);
+    };
+
+    const handleEditSave = async (updatedBoard: Board) => {
+        await UpdateBoardById(board.id, updatedBoard);
+        setShowEditPopup(false);
+    };
+
+    const handleDelete = async () => {
+        await DeleteBoardById(board.id);
+        setShowDeletePopup(false);
     };
 
     return (
@@ -43,9 +54,23 @@ export default function BoardNav ({board} : {board: Board}) {
                     <Image src="/Image/member.png" alt="Member" width={32} height={32}/>
                     <div className="font-semibold">Member</div>
                 </div>
-                <Image src="/Image/edit.png" alt="Edit" width={50} height={50}/>
-                <Image src="/Image/delete.png" alt="Delete" width={50} height={50}/>
+                <Image src="/Image/edit.png" alt="Edit" width={50} height={50} onClick={() => setShowEditPopup(true)}/>
+                <Image src="/Image/delete.png" alt="Delete" width={50} height={50} onClick={() => setShowDeletePopup(true)}/>
             </div>
+
+            {showEditPopup && (
+                <EditBoardPopup
+                    board={board}
+                    onClose={() => setShowEditPopup(false)}
+                    onSave={handleEditSave}
+                />
+            )}
+            {showDeletePopup && (
+                <DeleteBoardPopup
+                    onClose={() => setShowDeletePopup(false)}
+                    onDelete={handleDelete}
+                />
+            )}
         </div>
-    )
+    );
 }
