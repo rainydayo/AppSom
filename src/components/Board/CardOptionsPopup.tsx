@@ -30,8 +30,7 @@ const CardOptionsPopup: React.FC<CardOptionsPopupProps> = ({ onClose, onView, on
     return (
         <div
             ref={popupRef}
-            className="absolute bg-white border rounded shadow-md z-10 w-36"
-            style={{ top: position.top, left: position.left }}
+            className="absolute left-32 bg-white border rounded shadow-md z-10 w-36"
         >
             <button className="block w-full text-left p-2 hover:bg-gray-200" onClick={onView}>
                 View

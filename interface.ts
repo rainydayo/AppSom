@@ -31,7 +31,7 @@ export interface Board {
     name: string,
     description: string,
     lists: List[],
-    favorite: boolean,
+    favorite: string[],
     owner: string, // user id
     member: string[], // user ids
     color: string

@@ -25,8 +25,8 @@ export default function BoardList({ starred }: { starred: boolean }) {
         const LoadBoards = async () => {
             const data: BoardJSON = await GetBoards();
             const filteredBoards = starred === true ?
-                data.data.filter(b => (b.favorite === starred && (b.owner === session.user.id || b.member.includes(session.user.id))))
-                : data.data.filter(b => (b.owner === session.user.id || b.member.includes(session.user.id)));
+                data.data.filter(b => Array.isArray(b.favorite) && b.favorite.includes(session.user.id) && b.member.includes(session.user.id))
+                : data.data.filter(b => b.owner === session.user.id || b.member.includes(session.user.id));
             setBoards(filteredBoards);
         };
         LoadBoards();
@@ -50,7 +50,7 @@ export default function BoardList({ starred }: { starred: boolean }) {
             name,
             description,
             lists: [],
-            favorite: starred,
+            favorite: [],
             owner: session.user.id,
             member: [session.user.id],
             color
@@ -95,7 +95,7 @@ export default function BoardList({ starred }: { starred: boolean }) {
                 {filteredBoards.length > 0 ?
                     filteredBoards.map((b) =>
                         <div key={b.id} className={`rounded w-[300px] h-[150px] relative`} style={{ backgroundColor: b.color }}>
-                            {b.favorite && (
+                            {Array.isArray(b.favorite) && b.favorite.includes(session.user.id) && (
                                 <FontAwesomeIcon
                                     icon={faStar}
                                     className="absolute top-2 right-2 text-yellow-300"

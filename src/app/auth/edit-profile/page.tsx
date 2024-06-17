@@ -82,7 +82,7 @@ export default function EditProfile() {
           <button
             type="button"
             className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            onClick={() => router.push('/')}
+            onClick={() => router.push('/board')}
           >
             Cancel
           </button>

@@ -31,7 +31,7 @@
               "color": "#33FF57",
               "member": [
                 "75c8ba78-d371-4ff6-be29-1139cfebf33c",
-                "2"
+                "89f5bb2a-77a8-48f4-9f6e-18ff7ce7bf0b"
               ],
               "list": "list1"
             }
@@ -59,11 +59,11 @@
           "board": "board1"
         }
       ],
-      "favorite": false,
+      "favorite": [],
       "owner": "75c8ba78-d371-4ff6-be29-1139cfebf33c",
       "member": [
         "75c8ba78-d371-4ff6-be29-1139cfebf33c",
-        "2"
+        "89f5bb2a-77a8-48f4-9f6e-18ff7ce7bf0b"
       ],
       "color": "#FFA500"
     },
@@ -98,7 +98,7 @@
               "color": "#33FF57",
               "member": [
                 "75c8ba78-d371-4ff6-be29-1139cfebf33c",
-                "2"
+                "89f5bb2a-77a8-48f4-9f6e-18ff7ce7bf0b"
               ],
               "list": "list3"
             }
@@ -126,11 +126,13 @@
           "board": "board2"
         }
       ],
-      "favorite": true,
-      "owner": "2",
+      "favorite": [
+        "75c8ba78-d371-4ff6-be29-1139cfebf33c"
+      ],
+      "owner": "89f5bb2a-77a8-48f4-9f6e-18ff7ce7bf0b",
       "member": [
         "75c8ba78-d371-4ff6-be29-1139cfebf33c",
-        "2"
+        "89f5bb2a-77a8-48f4-9f6e-18ff7ce7bf0b"
       ],
       "color": "#FF5733"
     },

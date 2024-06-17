@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useTheme } from './themeSet';
 import Image from 'next/image';
 import convertImgUrl from './convertImgUrl';
@@ -17,8 +17,8 @@ export default function Sidebar() {
   const [boards, setBoards] = useState<Board[]>([]);
   const [showPopup, setShowPopup] = useState(false);
   const { data: session } = useSession();
-
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const profileMenuRef = useRef<HTMLDivElement>(null);
 
   if (!session) {
     return null;
@@ -31,11 +31,24 @@ export default function Sidebar() {
         setBoards(filteredBoards);
     };
     LoadBoards();
-  }, [boards]);
+  }, [session.user.id]);
 
   const toggleProfileMenu = () => {
     setIsProfileMenuOpen(!isProfileMenuOpen);
   };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (profileMenuRef.current && !profileMenuRef.current.contains(event.target as Node)) {
+      setIsProfileMenuOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     changeTheme({ som: e.target.value });
@@ -55,13 +68,13 @@ export default function Sidebar() {
         name,
         description,
         lists: [],
-        favorite: false,
+        favorite: [],
         owner: session.user.id,
         member: [session.user.id],
         color: ""
     };
     await CreateBoard(newBoard);
-};
+  };
 
   const profilePicUrl = 'https://drive.google.com/file/d/17ad4RrjEqQmKiwgwA0PmRLoadt1AiigI/view?usp=drive_link';
   const logoUrl = "https://drive.google.com/file/d/1xNsGNsI9bwcRYSnb5hKCAiHwK0wrkuYD/view?usp=drive_link";
@@ -102,7 +115,7 @@ export default function Sidebar() {
                 </button>
               </div>
               {isProfileMenuOpen && (
-                <div className="absolute right-0 top-12 mt-2 w-48 bg-white text-black p-4 rounded shadow-lg z-50">
+                <div ref={profileMenuRef} className="absolute right-0 top-12 mt-2 w-48 bg-white text-black p-4 rounded shadow-lg z-50">
                   <Link href="/auth/edit-profile" className="block text-left mb-2 hover:bg-gray-200">
                     Edit Profile
                   </Link>
@@ -182,11 +195,11 @@ export default function Sidebar() {
         )}
       </div>
       {showPopup && (
-                <AddBoardPopup 
-                    onClose={() => setShowPopup(false)}
-                    onSave={handleCreateBoard}
-                />
-            )}
+        <AddBoardPopup 
+            onClose={() => setShowPopup(false)}
+            onSave={handleCreateBoard}
+        />
+      )}
     </div>
   );
 }

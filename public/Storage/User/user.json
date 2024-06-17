@@ -14,7 +14,15 @@
       "username": "user",
       "role": "USER",
       "password": "$2a$10$S6GjEI6B6q6EwqTJsFy14OB16fLOVxEV.TSWLCGQNrZGRM7ncrNQO",
-      "image": "/uploads/884f2bff-ee19-448d-bf04-dea4cb1fef7b_ProfilePic.png"
+      "image": "/uploads/eaf63a4f-19a6-40e7-b87a-bb2f702a5cb3_ProfilePic.png"
+    },
+    {
+      "id": "89f5bb2a-77a8-48f4-9f6e-18ff7ce7bf0b",
+      "name": "user02",
+      "username": "user02",
+      "role": "USER",
+      "password": "$2a$10$VFL7GpTSO2vNl61qkvF8iucM8Dl1BzGFANygVJLtxNG.IE1zqEV/y",
+      "image": "/uploads/myProfile.jpg"
     }
   ]
 }
