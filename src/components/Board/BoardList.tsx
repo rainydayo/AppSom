@@ -30,7 +30,7 @@ export default function BoardList({ starred }: { starred: boolean }) {
             setBoards(filteredBoards);
         };
         LoadBoards();
-    }, [starred, session.user.id]);
+    }, [starred, boards, session.user.id]);
 
     const sortedBoards = [...boards].sort((a, b) => {
         if (sortOrder === "a-z") {

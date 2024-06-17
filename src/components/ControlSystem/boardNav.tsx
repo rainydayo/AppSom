@@ -2,24 +2,32 @@ import { useEffect, useState } from "react";
 import { Board } from "../../../interface";
 import Image from "next/image";
 import UpdateBoardById from "@/lib/UpdateBoardById";
-import DeleteBoardById from "@/lib/DeleteBoardByID";
+import DeleteBoardById from "@/lib/DeleteBoardById";
 import { useSession } from "next-auth/react";
 import EditBoardPopup from "../Board/EditBoardPopup";
 import DeleteBoardPopup from "../Board/DeleteBoardPopup";
 import MemberListPopup from "../Board/MemberListPopup";
+import { redirect, useRouter } from "next/navigation";
 
 export default function BoardNav({ board }: { board: Board }) {
     
     const [showEditPopup, setShowEditPopup] = useState<boolean>(false);
     const [showDeletePopup, setShowDeletePopup] = useState<boolean>(false);
     const [showMemberPopup, setShowMemberPopup] = useState<boolean>(false);
+    const [currentBoard, setCurrentBoard] = useState<Board>(board);
+    const router = useRouter();
     const { data: session } = useSession();
 
     if (!session) {
         return null;
     }
-    
-    const [isStarActive, setIsStarActive] = useState<boolean>(board.favorite.includes(session?.user?.id || ""));
+    const init = Object.values(board.favorite).includes(session.user.id);
+    const [isStarActive, setIsStarActive] = useState<boolean>(init);
+
+    useEffect(() => {
+        board = currentBoard;
+    }, [currentBoard]);
+
 
     const handleStarClick = async () => {
         const userId = session.user.id;
@@ -34,22 +42,25 @@ export default function BoardNav({ board }: { board: Board }) {
 
         setIsStarActive(!isStarActive);
         await UpdateBoardById(board.id, updatedBoard);
+        setCurrentBoard(updatedBoard);
     };
 
     const handleEditSave = async (updatedBoard: Board) => {
         await UpdateBoardById(board.id, updatedBoard);
         setShowEditPopup(false);
+        setCurrentBoard(updatedBoard);
     };
 
     const handleDelete = async () => {
         await DeleteBoardById(board.id);
         setShowDeletePopup(false);
+        router.push('/board');
     };
 
     return (
         <div className="bg-orange-300 w-full h-8 flex flex-row justify-between items-center px-8 py-9">
             <div className="flex flex-row gap-3 items-center">
-                <h1 className="font-semibold text-3xl">{board.name} {board.owner === session.user.id ? " (Owner)" : " (Member)"}</h1>
+                <h1 className="font-semibold text-3xl">{currentBoard.name} {currentBoard.owner === session.user.id ? " (Owner)" : " (Member)"}</h1>
                 <Image 
                     src={isStarActive ? "/Image/star_Active.png" : "/Image/star_notActive.png"} 
                     alt="Star" 
@@ -73,7 +84,7 @@ export default function BoardNav({ board }: { board: Board }) {
 
             {showEditPopup && (
                 <EditBoardPopup
-                    board={board}
+                    board={currentBoard}
                     onClose={() => setShowEditPopup(false)}
                     onSave={handleEditSave}
                 />
@@ -86,7 +97,7 @@ export default function BoardNav({ board }: { board: Board }) {
             )}
             {showMemberPopup && (
                 <MemberListPopup
-                    board={board}
+                    board={currentBoard}
                     onClose={() => setShowMemberPopup(false)}
                 />
             )}

@@ -71,7 +71,7 @@ export default function Sidebar() {
         favorite: [],
         owner: session.user.id,
         member: [session.user.id],
-        color: ""
+        color: "orange"
     };
     await CreateBoard(newBoard);
   };
