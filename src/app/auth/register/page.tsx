@@ -54,20 +54,22 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex flex-col justify-center px-10 py-9 text-3xl font-bold text-center bg-som max-md:px-5">
-      <div className="flex flex-col items-center px-16 pb-20 bg-white rounded-2xl shadow-sm max-md:px-5 max-md:max-w-full">
-        <div className="flex flex-col items-center max-w-full w-[838px]">
-          <Image
-            loading="lazy"
-            alt="logo"
-            height={1000}
-            width={1000}
-            src={convertImgUrl(logoUrl)}
-            className="self-stretch w-fit -my-72 py-10"
-          />
-          <div className="text-3xl text-neutral-500 max-md:text-4xl">Register</div>
-          <div className="flex flex-col items-start px-4 pb-12 mt-8 max-w-full whitespace-nowrap rounded-xl border-solid bg-white bg-opacity-0 border-[3px] border-neutral-400 text-neutral-400 w-[500px] max-md:px-4">
-            <label className="z-10 justify-center px-2 py-px -mt-4 bg-white text-2xl" htmlFor="username">
+    <div className="flex flex-col justify-center items-center min-h-screen px-4 py-6 bg-som text-3xl font-bold text-center">
+      <div className="flex flex-col items-center w-full max-w-lg bg-white rounded-2xl shadow-sm px-6 py-8">
+        <Image
+          loading="lazy"
+          alt="logo"
+          height={2000}
+          width={2000}
+          src={convertImgUrl(logoUrl)}
+          className="w-4/6 h-auto"
+        />
+        <div className="text-3xl text-neutral-500 mb-6">
+          Register
+        </div>
+        <form className="w-full">
+          <div className="flex flex-col items-start mb-6">
+            <label className="text-2xl mb-2" htmlFor="username">
               Username
             </label>
             <input
@@ -75,11 +77,11 @@ export default function RegisterPage() {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-3 py-4 mt-2 -mb-6 text-2xl text-gray-700 bg-white border-none rounded-md focus:outline-none focus:ring-2 focus:ring-som"
+              className="w-full px-3 py-2 text-2xl text-gray-700 bg-white border border-neutral-400 rounded-md focus:outline-none focus:ring-2 focus:ring-som"
             />
           </div>
-          <div className="flex flex-col items-start px-4 pb-12 mt-6 max-w-full whitespace-nowrap rounded-xl border-solid bg-white bg-opacity-0 border-[3px] border-neutral-400 text-neutral-400 w-[500px] max-md:px-4">
-            <label className="z-10 justify-center px-2 py-px -mt-4 bg-white text-2xl" htmlFor="password">
+          <div className="flex flex-col items-start mb-6">
+            <label className="text-2xl mb-2" htmlFor="password">
               Password
             </label>
             <input
@@ -87,33 +89,34 @@ export default function RegisterPage() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-4 mt-2 -mb-6 text-2xl text-gray-700 bg-white border-none rounded-md focus:outline-none focus:ring-2 focus:ring-som"
+              className="w-full px-3 py-2 text-2xl text-gray-700 bg-white border border-neutral-400 rounded-md focus:outline-none focus:ring-2 focus:ring-som"
             />
           </div>
-          <div className="flex flex-col items-start px-4 pb-12 mt-6 max-w-full whitespace-nowrap rounded-xl border-solid bg-white bg-opacity-0 border-[3px] border-neutral-400 text-neutral-400 w-[500px] max-md:px-4">
-            <label className="z-10 justify-center px-2 py-px -mt-4 bg-white text-2xl" htmlFor="profilePic">
+          <div className="flex flex-col items-start mb-6">
+            <label className="text-2xl mb-2" htmlFor="profilePic">
               Profile Pic
             </label>
             <input
               id="profilePic"
               type="file"
               onChange={handleFileChange}
-              className="w-full px-3 py-4 mt-2 -mb-6 text-2xl text-gray-700 bg-white border-none rounded-md focus:outline-none focus:ring-2 focus:ring-som"
+              className="w-full px-3 py-2 text-2xl text-gray-700 bg-white border border-neutral-400 rounded-md focus:outline-none focus:ring-2 focus:ring-som"
             />
           </div>
-          {error && <div className="text-red-500 mt-4">{error}</div>}
+          {error && <div className="text-red-500 mb-4">{error}</div>}
           <button
             onClick={register}
-            className="justify-center px-10 py-4 mt-10 text-2xl text-white whitespace-nowrap bg-som rounded-xl max-md:px-4 max-md:mt-8 hover:bg-orange-700 hover:shadow-lg transition duration-300 ease-in-out"
+            type="button"
+            className="w-full px-4 py-3 text-2xl text-white bg-som rounded-xl hover:bg-orange-700 transition duration-300 ease-in-out"
           >
             Register
           </button>
-          <div className="flex gap-5 mt-7 max-md:flex-wrap">
-            <div className="flex-auto text-som text-xl">Already have an account?</div>
-            <Link href={'/auth/login'} className="flex-auto text-orange-700 underline text-xl hover:text-orange-400 hover:shadow-lg transition duration-300 ease-in-out">
-              Log-in
-            </Link>
-          </div>
+        </form>
+        <div className="flex flex-col items-center mt-6 text-xl">
+          <span className="text-som">Already have an account?</span>
+          <Link href={'/auth/login'} className="text-orange-700 underline hover:text-orange-400 transition duration-300 ease-in-out mt-2">
+            Log-in
+          </Link>
         </div>
       </div>
     </div>

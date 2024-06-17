@@ -142,12 +142,12 @@ export default function Sidebar() {
           </li>
           <li className="mb-2 mt-5 flex items-center justify-between">
             <a className="text-white font-bold text-xl">Your Board</a>
-            <button
+            {/* <button
             onClick={() => setShowPopup(true)}
             className="text-white font-bold text-xl bg-transparent border-none cursor-pointer focus:outline-none"
           >
             +
-          </button>
+          </button> */}
           </li>
           <div className="max-h-32 overflow-y-auto">
             {
