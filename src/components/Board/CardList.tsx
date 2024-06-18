@@ -4,13 +4,14 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 import CardOptionsPopup from "./CardOptionsPopup";
 import ViewCardPopup from "./ViewCardPopup";
 import DeleteCardPopup from "./DeleteCardPopup";
+import CardMemberPopup from "./CardMemberPopup";
 import DeleteCardById from "@/lib/DeleteCardById";
 
 interface CardListProps {
     list: List;
     onEditCard: (card: Card) => void;
     onAddCard: (listId: string) => void;
-    permission : boolean;
+    permission: boolean;
 }
 
 export default function CardList({ list, onEditCard, onAddCard, permission }: CardListProps) {
@@ -20,6 +21,7 @@ export default function CardList({ list, onEditCard, onAddCard, permission }: Ca
     const [selectedCard, setSelectedCard] = useState<Card | null>(null);
     const [viewPopupVisible, setViewPopupVisible] = useState(false);
     const [deletePopupVisible, setDeletePopupVisible] = useState(false);
+    const [memberPopupVisible, setMemberPopupVisible] = useState(false);
 
     useEffect(() => {
         setCards(list.cards);
@@ -71,9 +73,18 @@ export default function CardList({ list, onEditCard, onAddCard, permission }: Ca
             return;
         }
         await DeleteCardById(selectedCard.id, selectedCard.list, list.board);
-        setCards(cards.filter(c => c.id != selectedCard.id));
+        setCards(cards.filter(c => c.id !== selectedCard.id));
         setDeletePopupVisible(false);
-    }
+    };
+
+    const handleMemberCard = () => {
+        setMemberPopupVisible(true);
+        handleClosePopup();
+    };
+
+    const handleCloseMemberPopup = () => {
+        setMemberPopupVisible(false);
+    };
 
     return (
         <Droppable droppableId={list.id} type="card">
@@ -87,7 +98,7 @@ export default function CardList({ list, onEditCard, onAddCard, permission }: Ca
                         <Draggable key={c.id} draggableId={c.id} index={index}>
                             {(provided) => (
                                 <div
-                                    className="bg-white shadow-lg w-full px-3 py-2 rounded flex flex-row items-center gap-2 "
+                                    className="bg-white shadow-lg w-full px-3 py-2 rounded flex flex-row items-center gap-2"
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                     ref={provided.innerRef}
@@ -103,19 +114,18 @@ export default function CardList({ list, onEditCard, onAddCard, permission }: Ca
                         </Draggable>
                     ))}
                     {provided.placeholder}
-                    {
-                        permission ? 
+                    {permission && (
                         <button onClick={() => onAddCard(list.id)}>
                             <h1 className="font-semibold text-lg">+ Add a Card</h1>
-                        </button> : null
-                    }
-                    
+                        </button>
+                    )}
+
                     {popupVisible && selectedCard && (
                         <CardOptionsPopup
                             onClose={handleClosePopup}
                             onView={handleView}
                             onEdit={handleEdit}
-                            onAddCard={handleAddCard}
+                            onMember={handleMemberCard}
                             onDelete={handleDelete}
                             position={popupPosition}
                             permission={permission}
@@ -128,14 +138,19 @@ export default function CardList({ list, onEditCard, onAddCard, permission }: Ca
                             lid={selectedCard.list}
                         />
                     )}
-                    {
-                        deletePopupVisible && selectedCard && (
-                            <DeleteCardPopup
-                                onClose={() => setDeletePopupVisible(false)}
-                                onDelete={onDeleteHandler}
-                            />
-                        )
-                    }
+                    {deletePopupVisible && selectedCard && (
+                        <DeleteCardPopup
+                            onClose={() => setDeletePopupVisible(false)}
+                            onDelete={onDeleteHandler}
+                        />
+                    )}
+                    {memberPopupVisible && selectedCard && (
+                        <CardMemberPopup
+                            cid={selectedCard.id}
+                            lid={selectedCard.list}
+                            onClose={handleCloseMemberPopup}
+                        />
+                    )}
                 </div>
             )}
         </Droppable>

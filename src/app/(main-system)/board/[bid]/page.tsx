@@ -24,6 +24,7 @@ import { BorderAllIcon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
 import EditCardPopup from "@/components/Board/EditCardPopup";
 import DeleteCardById from "@/lib/DeleteCardById";
+import CardMemberPopup from "@/components/Board/CardMemberPopup";
 
 interface BoardIdPageProps {
     params: {
@@ -42,6 +43,7 @@ const BoardIdPage: React.FC<BoardIdPageProps> = ({ params }) => {
     const [showDeleteListPopup, setShowDeleteListPopup] = useState<boolean>(false);
     const [showEditCardPopup, setShowEditCardPopup] = useState<boolean>(false);
     const [showDeleteCardPopup, setShowDeleteCardPopup] = useState<boolean>(false);
+    const [showCardMemberPopup, setShowCardMemberPopup] = useState<boolean>(false);
     const [selectedList, setSelectedList] = useState<List | null>(null);
     const [selectedCard, setSelectedCard] = useState<Card | null>(null);
     const {data: session} = useSession();
@@ -369,14 +371,13 @@ const BoardIdPage: React.FC<BoardIdPageProps> = ({ params }) => {
                 />
             )}
             {
-                showEditCardPopup && selectedCard && (
-                    <EditCardPopup
-                        card={selectedCard}
-                        onClose={() => setShowEditCardPopup(false)}
-                        onSave={handleSaveEditCard}
-                    />
-                )
-            }            
+            showEditCardPopup && selectedCard && (
+                <EditCardPopup
+                    card={selectedCard}
+                    onClose={() => setShowEditCardPopup(false)}
+                    onSave={handleSaveEditCard}
+                />
+            )}            
         </div> 
             : null
         }
