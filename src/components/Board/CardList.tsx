@@ -111,7 +111,8 @@ export default function CardList({ list, onEditCard, onAddCard, permission }: Ca
                     {viewPopupVisible && selectedCard && (
                         <ViewCardPopup
                             onClose={handleCloseViewPopup}
-                            card={selectedCard}
+                            cid={selectedCard.id}
+                            lid={selectedCard.list}
                         />
                     )}
                 </div>

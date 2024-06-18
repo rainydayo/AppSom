@@ -1,5 +1,5 @@
-export default async function RemoveMember (uid: string, bid: string) {
-    const response = await fetch(`/api/remove-member`, {
+export default async function RemoveMemberBoard (uid: string, bid: string) {
+    const response = await fetch(`/api/remove-member-board`, {
         method: "DELETE",
         body: JSON.stringify({
             uid: uid,

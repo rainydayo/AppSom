@@ -3,13 +3,17 @@ import { Card, List, Board, User, UserJSON, BoardJSON } from '../../../interface
 import GetUserProfile from '@/lib/GetUserProfile';
 import UpdateCardById from '@/lib/UpdateCardById';
 import GetBoards from '@/lib/GetBoards';
+import AddMemberCard from '@/lib/AddMemberCard';
+import RemoveMemberCard from '@/lib/RemoveMemberCard';
 
 interface ViewCardPopupProps {
     onClose: () => void;
-    card: Card;
+    cid: string;
+    lid: string;
 }
 
-const ViewCardPopup: React.FC<ViewCardPopupProps> = ({ onClose, card }) => {
+const ViewCardPopup: React.FC<ViewCardPopupProps> = ({ onClose, cid, lid }) => {
+    const [card, setCard] = useState<Card | null>();
     const [list, setList] = useState<List | null>(null);
     const [board, setBoard] = useState<Board | null>(null);
     const [members, setMembers] = useState<User[]>([]);
@@ -25,7 +29,7 @@ const ViewCardPopup: React.FC<ViewCardPopupProps> = ({ onClose, card }) => {
             let foundBoard: Board | null = null;
 
             for (const board of data.data) {
-                const list = board.lists.find((list) => list.id === card.list);
+                const list = board.lists.find((list) => list.id === lid);
                 if (list) {
                     foundList = list;
                     foundBoard = board;
@@ -37,15 +41,36 @@ const ViewCardPopup: React.FC<ViewCardPopupProps> = ({ onClose, card }) => {
                 setList(foundList);
                 setBoard(foundBoard);
 
-                const memberProfiles = await Promise.all(
-                    card.member.map((userId) => GetUserProfile(userId))
-                );
-                setMembers(memberProfiles);
+                const cardData = foundList.cards.find(c => c.id === cid);
+                if (cardData) {
+                    setCard(cardData);
+                    const memberProfiles = await Promise.all(
+                    cardData.member.map((userId) => GetUserProfile(userId)));
+                    setMembers(memberProfiles);
+                }
+                
             }
         };
 
         fetchData();
-    }, [card]);
+    }, []);
+
+    const handleClickOutside = (event: MouseEvent) => {
+        if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
+            onClose();
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
+    if (!board || !list || !card) {
+        return null;
+    }
 
     const handleSearch = async (username: string) => {
         const response = await fetch('/Storage/User/user.json', {
@@ -64,29 +89,21 @@ const ViewCardPopup: React.FC<ViewCardPopupProps> = ({ onClose, card }) => {
     };
 
     const handleAddMember = async (user: User) => {
-        const updatedCard = { ...card, member: [...card.member, user.id] };
-        await UpdateCardById(updatedCard, card.id, card.list, board?.id || '');
+        await AddMemberCard(user.id, board.id, list.id, card.id);
         setMembers([...members, user]);
+        setCard({ ...card, member: [...card.member, user.id]});
         setSearchResults([]);
         setSearchTerm('');
     };
 
-    const handleClickOutside = (event: MouseEvent) => {
-        if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
-            onClose();
-        }
-    };
-
-    useEffect(() => {
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
-
-    if (!board || !list) {
-        return null;
+    const handleRemoveMember = async (uid: string) => {
+        await RemoveMemberCard(uid, board.id, list.id, card.id);
+        setMembers(members.filter(u => u.id != uid));
+        setCard({ ...card, member: card.member.filter(m => m != uid)});
+        setSearchResults([]);
+        setSearchTerm('');
     }
+
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -118,6 +135,7 @@ const ViewCardPopup: React.FC<ViewCardPopupProps> = ({ onClose, card }) => {
                             <li key={member.id} className="flex items-center mb-2">
                                 <img src={member.image} alt={member.name} className="w-8 h-8 rounded-full mr-2" />
                                 <span>{member.name}</span>
+                                <button className='rounded bg-red-600 px-2 text-white ml-auto hover:bg-red-800' onClick={() => handleRemoveMember(member.id)} >X</button>
                             </li>
                         ))}
                     </ul>

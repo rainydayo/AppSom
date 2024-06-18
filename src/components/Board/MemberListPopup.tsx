@@ -2,10 +2,10 @@ import { useState, useEffect, useRef } from 'react';
 import { Board, User, UserJSON } from '../../../interface';
 import GetUserProfile from '@/lib/GetUserProfile';
 import UpdateBoardById from '@/lib/UpdateBoardById';
-import RemoveMember from '@/lib/RemoveMember';
+import RemoveMemberBoard from '@/lib/RemoveMemberBoard';
 import GetBoardById from '@/lib/GetBoardById';
-import AddMember from '@/lib/AddMember';
 import CheckOwner from '@/lib/CheckOwner';
+import AddMemberBoard from '@/lib/AddMemberBoard';
 
 interface MemberListPopupProps {
     bid: string;
@@ -20,6 +20,7 @@ const MemberListPopup: React.FC<MemberListPopupProps> = ({ bid, onClose }) => {
     const popupRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        
         const getBoardAndMembers = async () => {
             const boardData = await GetBoardById(bid);
             setBoard(boardData);
@@ -67,15 +68,17 @@ const MemberListPopup: React.FC<MemberListPopupProps> = ({ bid, onClose }) => {
     };
 
     const handleAddMember = async (user: User) => {
-        await AddMember(user.id, board.id);
+        await AddMemberBoard(user.id, board.id);
         setMembers([...members, user]);
+        setBoard({ ...board, member: [...board.member, user.id]});
         setSearchResults([]);
         setSearchTerm('');
     };
 
     const handleRemoveMember = async (uid: string) => {
-        await RemoveMember(uid, board.id);
+        await RemoveMemberBoard(uid, board.id);
         setMembers(members.filter(u => u.id != uid));
+        setBoard({ ...board, member: board.member.filter(m => m != uid)});
         setSearchResults([]);
         setSearchTerm('');
     }
@@ -113,12 +116,16 @@ const MemberListPopup: React.FC<MemberListPopupProps> = ({ bid, onClose }) => {
                         <li key={user.id} className="flex items-center mb-2">
                             <img src={user.image} alt={user.name} className="w-8 h-8 rounded-full mr-2" />
                             <span>{user.name}</span>
-                            <button
-                                onClick={() => handleAddMember(user)}
-                                className="ml-auto bg-blue-500 text-white p-2 rounded"
-                            >
-                                Add
-                            </button>
+                            {
+                                board.member.includes(user.id) ? null :
+                                <button
+                                    onClick={() => handleAddMember(user)}
+                                    className="ml-auto bg-blue-500 text-white p-2 rounded"
+                                >
+                                    Add
+                                </button>
+                            }
+                            
                         </li>
                     ))}
                 </ul>
