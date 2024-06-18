@@ -23,9 +23,9 @@ export default function CardList({ list, onEditCard, onAddCard }: CardListProps)
 
     const handleCardClick = (card: Card, event: React.MouseEvent) => {
         const rect = event.currentTarget.getBoundingClientRect();
-        setPopupPosition({ 
-            top: rect.top - window.scrollY - rect.height, 
-            left: rect.left - window.scrollX - rect.width
+        setPopupPosition({
+            top: event.clientY,
+            left: event.clientX
         });
         setSelectedCard(card);
         setPopupVisible(true);
@@ -105,9 +105,7 @@ export default function CardList({ list, onEditCard, onAddCard }: CardListProps)
                     {viewPopupVisible && selectedCard && (
                         <ViewCardPopup
                             onClose={handleCloseViewPopup}
-                            cardName={selectedCard.name}
-                            cardDescription={selectedCard.description || ""}
-                            cardColor={selectedCard.color}
+                            card={selectedCard}
                         />
                     )}
                 </div>

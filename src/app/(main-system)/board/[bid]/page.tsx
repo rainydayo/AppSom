@@ -223,7 +223,7 @@ const BoardIdPage: React.FC<BoardIdPageProps> = ({ params }) => {
     };
 
     return (
-        <main className="flex flex-col bg-somon h-full ml-64">
+        <main className="flex flex-col bg-somon min-h-screen ml-64">
             <BoardNav board={board} />
             <DragDropContext onDragEnd={handleDragEnd}>
                 <Droppable droppableId="all-lists" direction="horizontal" type="list">
@@ -268,7 +268,7 @@ const BoardIdPage: React.FC<BoardIdPageProps> = ({ params }) => {
                             ))}
                             {provided.placeholder}
                             <button
-                                className="p-5 bg-somon font-bold shadow-inner drop-shadow-xl rounded w-[200px]"
+                                className="p-5 bg-sombar hover:bg-som font-bold shadow-inner drop-shadow-xl rounded w-[200px]"
                                 onClick={() => setShowAddListPopup(true)}
                             >
                                 + Add a List
