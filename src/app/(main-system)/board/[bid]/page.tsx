@@ -18,6 +18,10 @@ import { DragDropContext, Droppable, Draggable, DropResult } from "react-beautif
 import UpdateBoardById from "@/lib/UpdateBoardById";
 import UpdateListById from "@/lib/UpdateListById";
 import DeleteListById from "@/lib/DeleteListById";
+import CheckOwner from "@/lib/CheckOwner";
+import { useSession } from "next-auth/react";
+import { BorderAllIcon } from "@radix-ui/react-icons";
+import { useRouter } from "next/navigation";
 
 interface BoardIdPageProps {
     params: {
@@ -37,6 +41,11 @@ const BoardIdPage: React.FC<BoardIdPageProps> = ({ params }) => {
     const [showEditCardPopup, setShowEditCardPopup] = useState<boolean>(false);
     const [selectedList, setSelectedList] = useState<List | null>(null);
     const [selectedCard, setSelectedCard] = useState<Card | null>(null);
+    const {data: session} = useSession();
+    const router = useRouter();
+    if (!session) {
+        return null;
+    }
 
     useEffect(() => {
         const loadList = async () => {
@@ -57,6 +66,9 @@ const BoardIdPage: React.FC<BoardIdPageProps> = ({ params }) => {
     }
 
     const handleAddList = (name: string, description: string) => {
+        if (!CheckOwner(board.owner, session.user.id)) {
+            return;
+        }
         const uuid = crypto.randomUUID();
         const newList: List = {
             id: uuid,
@@ -71,6 +83,9 @@ const BoardIdPage: React.FC<BoardIdPageProps> = ({ params }) => {
     };
 
     const handleEditList = async (id: string, name: string, description: string) => {
+        if (!CheckOwner(board.owner, session.user.id)) {
+            return;
+        }
         const updatedLists = lists.map(list => 
             list.id === id ? { ...list, name, description } : list
         );
@@ -87,6 +102,9 @@ const BoardIdPage: React.FC<BoardIdPageProps> = ({ params }) => {
     };
 
     const handleDragEnd = async (result: DropResult) => {
+        if (!CheckOwner(board.owner, session.user.id)) {
+            return;
+        }
         const { destination, source, type } = result;
         console.log("Drag result:", result);
 
@@ -150,17 +168,26 @@ const BoardIdPage: React.FC<BoardIdPageProps> = ({ params }) => {
     };
 
     const handleEditListClick = () => {
+        if (!CheckOwner(board.owner, session.user.id)) {
+            return;
+        }
         console.log("Edit list:", selectedList?.id);
         setShowOptionsPopup(false);
         setShowEditListPopup(true);
     };
 
     const handleAddCard = (listId: string) => {
+        if (!CheckOwner(board.owner, session.user.id)) {
+            return;
+        }
         setSelectedList(lists.find((list) => list.id === listId) || null);
         setShowAddCardPopup(true);
     };
 
     const handleSaveCard = (newCard: Card) => {
+        if (!CheckOwner(board.owner, session.user.id)) {
+            return;
+        }
         const updatedLists = lists.map((list) => {
             if (list.id === newCard.list) {
                 return { ...list, cards: [...list.cards, newCard] };
@@ -180,11 +207,17 @@ const BoardIdPage: React.FC<BoardIdPageProps> = ({ params }) => {
     };
 
     const handleEditCardClick = (card: Card) => {
+        if (!CheckOwner(board.owner, session.user.id)) {
+            return;
+        }
         setSelectedCard(card);
         setShowEditCardPopup(true);
     };
 
     const handleSaveEditCard = (updatedCard: Card) => {
+        if (!CheckOwner(board.owner, session.user.id)) {
+            return;
+        }
         const updatedLists = lists.map((list) => {
             if (list.id === updatedCard.list) {
                 const updatedCards = list.cards.map((card) =>
@@ -202,12 +235,18 @@ const BoardIdPage: React.FC<BoardIdPageProps> = ({ params }) => {
     };
 
     const handleDeleteListClick = () => {
+        if (!CheckOwner(board.owner, session.user.id)) {
+            return;
+        }
         console.log("Delete list:", selectedList?.id);
         setShowOptionsPopup(false);
         setShowDeleteListPopup(true);
     };
 
     const handleDeleteList = async (listId: string) => {
+        if (!CheckOwner(board.owner, session.user.id)) {
+            return;
+        }
         if (!board) return;
 
         try {
@@ -222,8 +261,17 @@ const BoardIdPage: React.FC<BoardIdPageProps> = ({ params }) => {
         }
     };
 
+    if (!board.member.includes(session.user.id)) {
+        router.push('/board');
+    }
+
     return (
         <main className="flex flex-col bg-somon min-h-screen ml-64">
+            {
+                board.member.includes(session.user.id) ?
+
+            
+            <div>
             <BoardNav board={board} />
             <DragDropContext onDragEnd={handleDragEnd}>
                 <Droppable droppableId="all-lists" direction="horizontal" type="list">
@@ -252,7 +300,7 @@ const BoardIdPage: React.FC<BoardIdPageProps> = ({ params }) => {
                                                     onClick={() => handleOptionsClick(l)}
                                                 />
                                             </div>
-                                            <CardList list={l} onEditCard={handleEditCardClick} onAddCard={handleAddCard} />
+                                            <CardList list={l} onEditCard={handleEditCardClick} onAddCard={handleAddCard} permission={CheckOwner(board.owner, session.user.id)} />
                                             {showOptionsPopup && selectedList?.id === l.id && (
                                                 <ListOptionsPopup
                                                     onClose={() => setShowOptionsPopup(false)}
@@ -260,6 +308,7 @@ const BoardIdPage: React.FC<BoardIdPageProps> = ({ params }) => {
                                                     onEdit={handleEditListClick}
                                                     onAddCard={() => handleAddCard(l.id)}
                                                     onDelete={handleDeleteListClick}
+                                                    permission={CheckOwner(board.owner, session.user.id)}
                                                 />
                                             )}
                                         </div>
@@ -267,12 +316,16 @@ const BoardIdPage: React.FC<BoardIdPageProps> = ({ params }) => {
                                 </Draggable>
                             ))}
                             {provided.placeholder}
-                            <button
-                                className="p-5 bg-sombar hover:bg-som font-bold shadow-inner drop-shadow-xl rounded w-[200px]"
-                                onClick={() => setShowAddListPopup(true)}
-                            >
-                                + Add a List
-                            </button>
+                            {
+                                CheckOwner(board.owner, session.user.id) ? 
+                                <button
+                                    className="p-5 bg-sombar hover:bg-som font-bold shadow-inner drop-shadow-xl rounded w-[200px]"
+                                    onClick={() => setShowAddListPopup(true)}
+                                >
+                                    + Add a List
+                                </button> : null
+                            }
+                            
                         </div>
                     )}
                 </Droppable>
@@ -312,6 +365,10 @@ const BoardIdPage: React.FC<BoardIdPageProps> = ({ params }) => {
                     onSave={handleSaveCard}
                 />
             )}
+            
+        </div> 
+            : null
+        }
         </main>
     );
 };

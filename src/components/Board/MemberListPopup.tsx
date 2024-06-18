@@ -2,28 +2,54 @@ import { useState, useEffect, useRef } from 'react';
 import { Board, User, UserJSON } from '../../../interface';
 import GetUserProfile from '@/lib/GetUserProfile';
 import UpdateBoardById from '@/lib/UpdateBoardById';
+import RemoveMember from '@/lib/RemoveMember';
+import GetBoardById from '@/lib/GetBoardById';
+import AddMember from '@/lib/AddMember';
+import CheckOwner from '@/lib/CheckOwner';
 
 interface MemberListPopupProps {
-    board: Board;
+    bid: string;
     onClose: () => void;
 }
 
-const MemberListPopup: React.FC<MemberListPopupProps> = ({ board, onClose }) => {
+const MemberListPopup: React.FC<MemberListPopupProps> = ({ bid, onClose }) => {
+    const [board, setBoard] = useState<Board | null>();
     const [members, setMembers] = useState<User[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [searchResults, setSearchResults] = useState<User[]>([]);
     const popupRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const fetchMembers = async () => {
+        const getBoardAndMembers = async () => {
+            const boardData = await GetBoardById(bid);
+            setBoard(boardData);
+            if (!boardData) {
+                return null;
+            }
             const memberProfiles = await Promise.all(
-                board.member.map((userId) => GetUserProfile(userId))
+                boardData.member.map((userId) => GetUserProfile(userId))
             );
             setMembers(memberProfiles);
-        };
+        }
+        getBoardAndMembers();
+    }, []);
 
-        fetchMembers();
-    }, [board.member]);
+    const handleClickOutside = (event: MouseEvent) => {
+        if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
+            onClose();
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
+    if (!board) {
+        return null;
+    }
 
     const handleSearch = async (username: string) => {
         const response = await fetch('/Storage/User/user.json', {
@@ -41,25 +67,21 @@ const MemberListPopup: React.FC<MemberListPopupProps> = ({ board, onClose }) => 
     };
 
     const handleAddMember = async (user: User) => {
-        const updatedBoard = { ...board, member: [...board.member, user.id] };
-        await UpdateBoardById(board.id, updatedBoard);
+        await AddMember(user.id, board.id);
         setMembers([...members, user]);
         setSearchResults([]);
         setSearchTerm('');
     };
 
-    const handleClickOutside = (event: MouseEvent) => {
-        if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
-            onClose();
-        }
-    };
+    const handleRemoveMember = async (uid: string) => {
+        await RemoveMember(uid, board.id);
+        setMembers(members.filter(u => u.id != uid));
+        setSearchResults([]);
+        setSearchTerm('');
+    }
 
-    useEffect(() => {
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
+    
+    
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -67,9 +89,12 @@ const MemberListPopup: React.FC<MemberListPopupProps> = ({ board, onClose }) => 
                 <h2 className="text-xl font-bold mb-5 text-center">Board Members</h2>
                 <ul className="mb-3">
                     {members.map(member => (
-                        <li key={member.id} className="flex items-center mb-2">
+                        <li key={member.id} className="flex items-center mb-2" >
                             <img src={member.image} alt={member.name} className="w-8 h-8 rounded-full mr-2" />
                             <span>{member.name}</span>
+                            {
+                                CheckOwner(board.owner, member.id) ? null : <button className='rounded bg-red-600 px-2 text-white ml-auto hover:bg-red-800' onClick={() => handleRemoveMember(member.id)} >X</button>
+                            }
                         </li>
                     ))}
                 </ul>

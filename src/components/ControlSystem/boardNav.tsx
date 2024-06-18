@@ -8,6 +8,7 @@ import EditBoardPopup from "../Board/EditBoardPopup";
 import DeleteBoardPopup from "../Board/DeleteBoardPopup";
 import MemberListPopup from "../Board/MemberListPopup";
 import { redirect, useRouter } from "next/navigation";
+import CheckOwner from "@/lib/CheckOwner";
 
 export default function BoardNav({ board }: { board: Board }) {
     
@@ -46,12 +47,18 @@ export default function BoardNav({ board }: { board: Board }) {
     };
 
     const handleEditSave = async (updatedBoard: Board) => {
+        if (!CheckOwner(board.owner, session.user.id)) {
+            return alert("not owner");
+        }
         await UpdateBoardById(board.id, updatedBoard);
         setShowEditPopup(false);
         setCurrentBoard(updatedBoard);
     };
 
     const handleDelete = async () => {
+        if (!CheckOwner(board.owner, session.user.id)) {
+            return alert("not owner");
+        }
         await DeleteBoardById(board.id);
         setShowDeletePopup(false);
         router.push('/board');
@@ -69,19 +76,22 @@ export default function BoardNav({ board }: { board: Board }) {
                     onClick={handleStarClick}
                 />
             </div>
-            
-            <div className="flex flex-row gap-3">
-                <div 
-                    className="flex flex-row gap-2 items-center bg-gray-300 py-2 px-3 rounded cursor-pointer"
-                    onClick={() => setShowMemberPopup(true)}
-                >
-                    <Image src="/Image/member.png" alt="Member" width={32} height={32}/>
-                    <div className="font-semibold">Member</div>
-                </div>
-                <Image src="/Image/edit.png" alt="Edit" width={50} height={50} onClick={() => setShowEditPopup(true)}/>
-                <Image src="/Image/delete.png" alt="Delete" width={50} height={50} onClick={() => setShowDeletePopup(true)}/>
-            </div>
-
+            {
+                CheckOwner(board.owner, session.user.id) ? 
+                    <div className="flex flex-row gap-3"> 
+                    
+                    <div 
+                        className="flex flex-row gap-2 items-center bg-gray-300 py-2 px-3 rounded cursor-pointer"
+                        onClick={() => setShowMemberPopup(true)}
+                    >
+                        <Image src="/Image/member.png" alt="Member" width={32} height={32}/>
+                        <div className="font-semibold">Member</div>
+                    </div>
+                    <Image src="/Image/edit.png" alt="Edit" width={50} height={50} onClick={() => setShowEditPopup(true)}/>
+                    <Image src="/Image/delete.png" alt="Delete" width={50} height={50} onClick={() => setShowDeletePopup(true)}/>
+                    </div> :
+                    null
+            }
             {showEditPopup && (
                 <EditBoardPopup
                     board={currentBoard}
@@ -97,7 +107,7 @@ export default function BoardNav({ board }: { board: Board }) {
             )}
             {showMemberPopup && (
                 <MemberListPopup
-                    board={currentBoard}
+                    bid={currentBoard.id}
                     onClose={() => setShowMemberPopup(false)}
                 />
             )}

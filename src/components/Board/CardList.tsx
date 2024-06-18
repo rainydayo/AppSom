@@ -8,9 +8,10 @@ interface CardListProps {
     list: List;
     onEditCard: (card: Card) => void;
     onAddCard: (listId: string) => void;
+    permission : boolean
 }
 
-export default function CardList({ list, onEditCard, onAddCard }: CardListProps) {
+export default function CardList({ list, onEditCard, onAddCard, permission }: CardListProps) {
     const [cards, setCards] = useState<Card[]>(list.cards);
     const [popupVisible, setPopupVisible] = useState(false);
     const [popupPosition, setPopupPosition] = useState<{ top: number; left: number }>({ top: 0, left: 0 });
@@ -89,9 +90,13 @@ export default function CardList({ list, onEditCard, onAddCard }: CardListProps)
                         </Draggable>
                     ))}
                     {provided.placeholder}
-                    <button onClick={() => onAddCard(list.id)}>
-                        <h1 className="font-semibold text-lg">+ Add a Card</h1>
-                    </button>
+                    {
+                        permission ? 
+                        <button onClick={() => onAddCard(list.id)}>
+                            <h1 className="font-semibold text-lg">+ Add a Card</h1>
+                        </button> : null
+                    }
+                    
                     {popupVisible && selectedCard && (
                         <CardOptionsPopup
                             onClose={handleClosePopup}
@@ -100,6 +105,7 @@ export default function CardList({ list, onEditCard, onAddCard }: CardListProps)
                             onAddCard={handleAddCard}
                             onDelete={handleDelete}
                             position={popupPosition}
+                            permission={permission}
                         />
                     )}
                     {viewPopupVisible && selectedCard && (

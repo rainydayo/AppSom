@@ -9,9 +9,10 @@ interface CardOptionsPopupProps {
     onAddCard: () => void;
     onDelete: () => void;
     position: { top: number; left: number };
+    permission: boolean;
 }
 
-const CardOptionsPopup: React.FC<CardOptionsPopupProps> = ({ onClose, onView, onEdit, onAddCard, onDelete, position }) => {
+const CardOptionsPopup: React.FC<CardOptionsPopupProps> = ({ onClose, onView, onEdit, onAddCard, onDelete, position, permission }) => {
     const popupRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -35,15 +36,21 @@ const CardOptionsPopup: React.FC<CardOptionsPopupProps> = ({ onClose, onView, on
             <button className="block w-full text-left p-2 hover:bg-gray-200" onClick={onView}>
                 View
             </button>
-            <button className="block w-full text-left p-2 hover:bg-gray-200" onClick={onEdit}>
-                Edit
-            </button>
-            <button className="block w-full text-left p-2 hover:bg-gray-200" onClick={onAddCard}>
-                Add Card
-            </button>
-            <button className="block w-full text-left p-2 hover:bg-gray-200" onClick={onDelete}>
-                Delete
-            </button>
+            {
+                permission ? 
+                <div>
+                    <button className="block w-full text-left p-2 hover:bg-gray-200" onClick={onEdit}>
+                        Edit
+                    </button>
+                    <button className="block w-full text-left p-2 hover:bg-gray-200" onClick={onAddCard}>
+                        Add Card
+                    </button>
+                    <button className="block w-full text-left p-2 hover:bg-gray-200" onClick={onDelete}>
+                        Delete
+                    </button>
+                </div> : null
+            }
+            
         </div>
     );
 };
