@@ -3,12 +3,14 @@ import { Card, List } from "../../../interface";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import CardOptionsPopup from "./CardOptionsPopup";
 import ViewCardPopup from "./ViewCardPopup";
+import DeleteCardPopup from "./DeleteCardPopup";
+import DeleteCardById from "@/lib/DeleteCardById";
 
 interface CardListProps {
     list: List;
     onEditCard: (card: Card) => void;
     onAddCard: (listId: string) => void;
-    permission : boolean
+    permission : boolean;
 }
 
 export default function CardList({ list, onEditCard, onAddCard, permission }: CardListProps) {
@@ -17,6 +19,7 @@ export default function CardList({ list, onEditCard, onAddCard, permission }: Ca
     const [popupPosition, setPopupPosition] = useState<{ top: number; left: number }>({ top: 0, left: 0 });
     const [selectedCard, setSelectedCard] = useState<Card | null>(null);
     const [viewPopupVisible, setViewPopupVisible] = useState(false);
+    const [deletePopupVisible, setDeletePopupVisible] = useState(false);
 
     useEffect(() => {
         setCards(list.cards);
@@ -59,8 +62,18 @@ export default function CardList({ list, onEditCard, onAddCard, permission }: Ca
 
     const handleDelete = () => {
         console.log("Delete card:", selectedCard);
+        setDeletePopupVisible(true);
         handleClosePopup();
     };
+
+    const onDeleteHandler = async () => {
+        if (!selectedCard) {
+            return;
+        }
+        await DeleteCardById(selectedCard.id, selectedCard.list, list.board);
+        setCards(cards.filter(c => c.id != selectedCard.id));
+        setDeletePopupVisible(false);
+    }
 
     return (
         <Droppable droppableId={list.id} type="card">
@@ -115,6 +128,14 @@ export default function CardList({ list, onEditCard, onAddCard, permission }: Ca
                             lid={selectedCard.list}
                         />
                     )}
+                    {
+                        deletePopupVisible && selectedCard && (
+                            <DeleteCardPopup
+                                onClose={() => setDeletePopupVisible(false)}
+                                onDelete={onDeleteHandler}
+                            />
+                        )
+                    }
                 </div>
             )}
         </Droppable>
