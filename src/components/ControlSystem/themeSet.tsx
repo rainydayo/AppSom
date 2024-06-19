@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 
 const ThemeContext = createContext({
-  theme: { som: '#FF6B18', somon: '#FDEAE3', sombar: '#FAA88A' },
+  theme: { som: '#FF6B18', somon: '#FDEAE3', sombar: '#FDBA74' },
   changeTheme: (newColors: any) => {},
 });
 
@@ -9,7 +9,7 @@ export const ThemeProvider = ({ children }: {children: React.ReactNode}) => {
   const [theme, setTheme] = useState<{ som: string, somon: string, sombar: string }>({
     som: '#FF6B18', // Default color
     somon: '#FDEAE3', // Lighter color
-    sombar: '#FAA88A', // Darker color
+    sombar: '#FDBA74', // Darker color
   });
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export const ThemeProvider = ({ children }: {children: React.ReactNode}) => {
 
   if (newColors.som === '#FF6B18') {
     lighterSomon = '#FDEAE3';
-    darkerSombar = '#FAA88A';
+    darkerSombar = '#FDBA74';
   } else {
     lighterSomon = lightenColor(newColors.som, 60);
     darkerSombar = lightenColor(newColors.som, 30);

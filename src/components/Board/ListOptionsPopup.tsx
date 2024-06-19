@@ -36,7 +36,7 @@ const ListOptionsPopup: React.FC<ListOptionsPopupProps> = ({ onClose, onView, on
                     <button className="block w-full text-left p-2 hover:bg-gray-200" onClick={onEdit}>
                         Edit
                     </button>
-                    <button className="block w-full text-left p-2 hover:bg-gray-200" onClick={onAddCard}>
+                    <button className="block w-full text-left p-2 hover:bg-gray-200" onClick={()=>{onAddCard();onClose();}}>
                         Add Card
                     </button>
                     <button className="block w-full text-left p-2 hover:bg-gray-200" onClick={onDelete}>

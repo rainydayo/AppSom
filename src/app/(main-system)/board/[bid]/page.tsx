@@ -20,11 +20,8 @@ import UpdateListById from "@/lib/UpdateListById";
 import DeleteListById from "@/lib/DeleteListById";
 import CheckOwner from "@/lib/CheckOwner";
 import { useSession } from "next-auth/react";
-import { BorderAllIcon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
 import EditCardPopup from "@/components/Board/EditCardPopup";
-import DeleteCardById from "@/lib/DeleteCardById";
-import CardMemberPopup from "@/components/Board/CardMemberPopup";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -44,8 +41,6 @@ const BoardIdPage: React.FC<BoardIdPageProps> = ({ params }) => {
     const [showOptionsPopup, setShowOptionsPopup] = useState<boolean>(false);
     const [showDeleteListPopup, setShowDeleteListPopup] = useState<boolean>(false);
     const [showEditCardPopup, setShowEditCardPopup] = useState<boolean>(false);
-    const [showDeleteCardPopup, setShowDeleteCardPopup] = useState<boolean>(false);
-    const [showCardMemberPopup, setShowCardMemberPopup] = useState<boolean>(false);
     const [selectedList, setSelectedList] = useState<List | null>(null);
     const [selectedCard, setSelectedCard] = useState<Card | null>(null);
     const {data: session} = useSession();
@@ -338,12 +333,15 @@ const BoardIdPage: React.FC<BoardIdPageProps> = ({ params }) => {
                 </Droppable>
             </DragDropContext>
             {showAddListPopup && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-15">
                 <AddListPopup
                     onClose={() => setShowAddListPopup(false)}
                     onSave={handleAddList}
                 />
+                </div>
             )}
             {showEditListPopup && selectedList && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-15">
                 <EditListPopup
                     onClose={() => setShowEditListPopup(false)}
                     onSave={(name, description) => handleEditList(selectedList.id, name, description)}
@@ -351,34 +349,43 @@ const BoardIdPage: React.FC<BoardIdPageProps> = ({ params }) => {
                     listName={selectedList.name}
                     listDescription={selectedList.description}
                 />
+                </div>
             )}
             {showViewListPopup && selectedList && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-15">
                 <ViewListPopup
                     onClose={() => setShowViewListPopup(false)}
                     listName={selectedList.name}
                     listDescription={selectedList.description}
                 />
+                </div>
             )}
             {showDeleteListPopup && selectedList && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-15">
                 <DeleteListPopup
                     onClose={() => setShowDeleteListPopup(false)}
                     onDelete={() => handleDeleteList(selectedList.id)}
                 />
+                </div>
             )}
             {showAddCardPopup && selectedList && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-15">
                 <AddCardPopup
                     listId={selectedList.id}
                     onClose={() => setShowAddCardPopup(false)}
                     onSave={handleSaveCard}
                 />
+                </div>
             )}
             {
             showEditCardPopup && selectedCard && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-15">
                 <EditCardPopup
                     card={selectedCard}
                     onClose={() => setShowEditCardPopup(false)}
                     onSave={handleSaveEditCard}
                 />
+                </div>
             )}            
         </div> 
             : null

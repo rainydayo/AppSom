@@ -2,16 +2,15 @@ import { useEffect, useState } from "react";
 import { Board } from "../../../interface";
 import Image from "next/image";
 import UpdateBoardById from "@/lib/UpdateBoardById";
-import DeleteBoardById from "@/lib/DeleteBoardById";
+import DeleteBoardById from "@/lib/DeleteBoardByID";
 import { useSession } from "next-auth/react";
 import EditBoardPopup from "../Board/EditBoardPopup";
 import DeleteBoardPopup from "../Board/DeleteBoardPopup";
 import MemberListPopup from "../Board/MemberListPopup";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import CheckOwner from "@/lib/CheckOwner";
 
 export default function BoardNav({ board }: { board: Board }) {
-    
     const [showEditPopup, setShowEditPopup] = useState<boolean>(false);
     const [showDeletePopup, setShowDeletePopup] = useState<boolean>(false);
     const [showMemberPopup, setShowMemberPopup] = useState<boolean>(false);
@@ -28,7 +27,6 @@ export default function BoardNav({ board }: { board: Board }) {
     useEffect(() => {
         board = currentBoard;
     }, [currentBoard]);
-
 
     const handleStarClick = async () => {
         const userId = session.user.id;
@@ -65,7 +63,7 @@ export default function BoardNav({ board }: { board: Board }) {
     };
 
     return (
-        <div className="bg-orange-300 w-full h-8 flex flex-row justify-between items-center px-8 py-9">
+        <div className="bg-sombar w-full h-8 flex flex-row justify-between items-center px-8 py-9">
             <div className="flex flex-row gap-3 items-center">
                 <h1 className="font-semibold text-3xl">{currentBoard.name} {currentBoard.owner === session.user.id ? " (Owner)" : " (Member)"}</h1>
                 <Image 
@@ -87,29 +85,39 @@ export default function BoardNav({ board }: { board: Board }) {
                         <Image src="/Image/member.png" alt="Member" width={32} height={32}/>
                         <div className="font-semibold">Member</div>
                     </div>
-                    <Image src="/Image/edit.png" alt="Edit" width={50} height={50} onClick={() => setShowEditPopup(true)}/>
-                    <Image src="/Image/delete.png" alt="Delete" width={50} height={50} onClick={() => setShowDeletePopup(true)}/>
+                    <button onClick={() => setShowEditPopup(true)} className="p-0">
+                        <Image src="/Image/edit.png" alt="Edit" width={50} height={50} />
+                    </button>
+                    <button onClick={() => setShowDeletePopup(true)} className="p-0">
+                        <Image src="/Image/delete.png" alt="Delete" width={50} height={50} />
+                    </button>
                     </div> :
                     null
             }
             {showEditPopup && (
-                <EditBoardPopup
-                    board={currentBoard}
-                    onClose={() => setShowEditPopup(false)}
-                    onSave={handleEditSave}
-                />
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-15">
+                    <EditBoardPopup
+                        board={currentBoard}
+                        onClose={() => setShowEditPopup(false)}
+                        onSave={handleEditSave}
+                    />
+                </div>
             )}
             {showDeletePopup && (
-                <DeleteBoardPopup
-                    onClose={() => setShowDeletePopup(false)}
-                    onDelete={handleDelete}
-                />
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-15">
+                    <DeleteBoardPopup
+                        onClose={() => setShowDeletePopup(false)}
+                        onDelete={handleDelete}
+                    />
+                </div>
             )}
             {showMemberPopup && (
-                <MemberListPopup
-                    bid={currentBoard.id}
-                    onClose={() => setShowMemberPopup(false)}
-                />
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-15">
+                    <MemberListPopup
+                        bid={currentBoard.id}
+                        onClose={() => setShowMemberPopup(false)}
+                    />
+                </div>
             )}
         </div>
     );

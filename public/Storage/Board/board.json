@@ -30,7 +30,21 @@
           "id": "list2",
           "name": "In Progress",
           "description": "Tasks in progress",
-          "cards": [],
+          "cards": [
+            {
+              "id": "5ab73f59-8d07-458b-9066-30dbbb9bc5d8",
+              "name": "Task 2",
+              "description": "This is task 2",
+              "date_start": "2024-06-19",
+              "date_end": "2024-06-21",
+              "color": "orange",
+              "member": [
+                "75c8ba78-d371-4ff6-be29-1139cfebf33c",
+                "89f5bb2a-77a8-48f4-9f6e-18ff7ce7bf0b"
+              ],
+              "list": "list2"
+            }
+          ],
           "board": "board1"
         }
       ],

@@ -132,24 +132,30 @@ export default function CardList({ list, onEditCard, onAddCard, permission }: Ca
                         />
                     )}
                     {viewPopupVisible && selectedCard && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-15">
                         <ViewCardPopup
                             onClose={handleCloseViewPopup}
                             cid={selectedCard.id}
                             lid={selectedCard.list}
                         />
+                        </div>
                     )}
                     {deletePopupVisible && selectedCard && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-15">
                         <DeleteCardPopup
                             onClose={() => setDeletePopupVisible(false)}
                             onDelete={onDeleteHandler}
                         />
+                        </div>
                     )}
                     {memberPopupVisible && selectedCard && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-15">
                         <CardMemberPopup
                             cid={selectedCard.id}
                             lid={selectedCard.list}
                             onClose={handleCloseMemberPopup}
                         />
+                        </div>
                     )}
                 </div>
             )}
