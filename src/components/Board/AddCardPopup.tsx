@@ -2,6 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Card } from "../../../interface";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface AddCardPopupProps {
     listId: string;
@@ -19,9 +21,33 @@ const AddCardPopup: React.FC<AddCardPopupProps> = ({ listId, onClose, onSave }) 
 
     const handleSave = () => {
         if (!name || !description || !dateStart || !dateEnd) {
-            alert("Please input Card full detail");
+            toast.error('Please fill in all the Card detail', {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             return;
         }
+
+        if (new Date(dateEnd) < new Date(dateStart)) {
+            toast.error('Your Date is Wrong', {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            return;
+        }
+
         const newCard: Card = {
             id: crypto.randomUUID(),
             name,
@@ -32,6 +58,17 @@ const AddCardPopup: React.FC<AddCardPopupProps> = ({ listId, onClose, onSave }) 
             member: [],
             list: listId,
         };
+
+        toast.success('Add Card Success', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
         onSave(newCard);
         onClose();
     };

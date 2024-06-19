@@ -1,4 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Board } from '../../../interface';
 
 interface EditBoardPopupProps {
@@ -15,9 +17,28 @@ const EditBoardPopup: React.FC<EditBoardPopupProps> = ({ board, onClose, onSave 
 
     const handleSave = () => {
         if (!name || !description) {
-            alert('Please input Board name and description');
+            toast.error('Please fill in all the Board detail', {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             return;
         }
+        toast.success('Edit Board Success', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
         onSave({ ...board, name, description, color });
         onClose();
     };
@@ -72,6 +93,7 @@ const EditBoardPopup: React.FC<EditBoardPopupProps> = ({ board, onClose, onSave 
                     </button>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 };

@@ -4,6 +4,8 @@ import GetUserProfile from '@/lib/GetUserProfile';
 import GetBoards from '@/lib/GetBoards';
 import AddMemberCard from '@/lib/AddMemberCard';
 import RemoveMemberCard from '@/lib/RemoveMemberCard';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface CardMemberPopupProps {
     onClose: () => void;
@@ -93,6 +95,16 @@ const CardMemberPopup: React.FC<CardMemberPopupProps> = ({ onClose, cid, lid }) 
         setCard({ ...card, member: [...card.member, user.id]});
         setSearchResults([]);
         setSearchTerm('');
+        toast.success('Add Member Success', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
     };
 
     const handleRemoveMember = async (uid: string) => {
@@ -101,8 +113,17 @@ const CardMemberPopup: React.FC<CardMemberPopupProps> = ({ onClose, cid, lid }) 
         setCard({ ...card, member: card.member.filter(m => m != uid)});
         setSearchResults([]);
         setSearchTerm('');
+        toast.success('Delete Member Success', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
     }
-
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">

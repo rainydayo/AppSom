@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Card } from '../../../interface';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface EditCardPopupProps {
     card: Card;
@@ -17,9 +19,28 @@ const EditCardPopup: React.FC<EditCardPopupProps> = ({ card, onClose, onSave }) 
 
     const handleSave = () => {
         if (!name || !description) {
-            alert('Please input Board name and description');
+            toast.error('Please fill in all the Card detail', {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             return;
         }
+        toast.success('Edit Card Success', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
         onSave({ ...card, name, description, date_start: dateStart, date_end: dateEnd, color });
         onClose();
     };

@@ -6,6 +6,8 @@ import RemoveMemberBoard from '@/lib/RemoveMemberBoard';
 import GetBoardById from '@/lib/GetBoardById';
 import CheckOwner from '@/lib/CheckOwner';
 import AddMemberBoard from '@/lib/AddMemberBoard';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface MemberListPopupProps {
     bid: string;
@@ -73,6 +75,16 @@ const MemberListPopup: React.FC<MemberListPopupProps> = ({ bid, onClose }) => {
         setBoard({ ...board, member: [...board.member, user.id]});
         setSearchResults([]);
         setSearchTerm('');
+        toast.success('Add Member Success', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
     };
 
     const handleRemoveMember = async (uid: string) => {
@@ -81,10 +93,17 @@ const MemberListPopup: React.FC<MemberListPopupProps> = ({ bid, onClose }) => {
         setBoard({ ...board, member: board.member.filter(m => m != uid)});
         setSearchResults([]);
         setSearchTerm('');
+        toast.success('Delete Member Success', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
     }
-
-    
-    
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">

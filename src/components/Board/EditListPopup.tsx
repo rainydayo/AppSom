@@ -1,4 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface EditListPopupProps {
     onClose: () => void;
@@ -15,9 +17,28 @@ const EditListPopup: React.FC<EditListPopupProps> = ({ onClose, onSave, listId, 
 
     const handleSave = () => {
         if (!name || !description) {
-            alert('Please input List name and description');
+            toast.error('Please fill in all the List detail', {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             return;
         }
+        toast.success('Edit List Success', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
         onSave(name, description);
         onClose();
     };
